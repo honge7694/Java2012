@@ -45,5 +45,12 @@ public class Shopping5_4 {
 		this.addr = addr;
 	}
 	
-	
+	public void shoppingPrint() {
+		System.out.println("주문번호 : " + no);
+		System.out.println("주문자 아이디 : " + id);
+		System.out.println("주문 날짜 : " + date);
+		System.out.println("주문자 이름 : " + name);
+		System.out.println("주문 상품 번호 : " + pno);
+		System.out.println("배송 주소 : " + addr);
+	}
 }
