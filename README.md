@@ -1,6 +1,7 @@
 ### Oracle API https://docs.oracle.com/en/java/javase/11/docs/api/index.html 
 ### html https://www.w3schools.com/
-### image http://placeimg.com/300/300/animals
+### Image http://placeimg.com/300/300/animals
+
 ## 마크다운(Markdown) 문법
 
 ### 1.1 # 으로 헤더 설정하기
