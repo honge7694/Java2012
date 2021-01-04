@@ -13,6 +13,8 @@ public class QuizStaticTest {
 		QuizStaticStore store2 = QuizStaticStore.getInstance();
 		store1.showinfo();
 		store2.showinfo();
+		System.out.println(store1);
+		System.out.println(store2);
 		
 		// 손님 인스턴스 생성
 		QuizStaticGuest guest1 = new QuizStaticGuest(10000);
