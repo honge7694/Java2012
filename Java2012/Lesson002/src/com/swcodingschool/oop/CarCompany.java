@@ -22,7 +22,7 @@ public class CarCompany {
 		this.carCompanyProduct += carCompanyProduct;
 	}
 	
-	public void showinfo() {
+	public void showInfo() {
 		System.out.println("총 자동차 갯수 : " + carCompanyProduct);
 	}
 }
