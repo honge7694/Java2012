@@ -11,6 +11,18 @@ public class Customer {
 		customerGrade = "SIVER";
 		bonusRatio = 0.01;
 		System.out.println("customer 생성자 동작.");
+		initCustomer();
+	}
+	
+	public Customer(int customerID, String customerName) {
+		this.customerID = customerID;
+		this.customerName = customerName;
+		initCustomer();
+	}
+	
+	private void initCustomer() {
+		customerGrade = "SILVER";
+		bonusRatio = 0.01;
 	}
 	
 	public int getCustomerID() {
