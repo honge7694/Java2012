@@ -30,7 +30,10 @@ public class TestJoin {
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
+
 		return JoinName + "님의 아이디는" + JoinID + "입니다. ";
+
+
 	}
 	
 	
