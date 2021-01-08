@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>form 태그 다루기</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poor+Story&display=swap" rel="stylesheet">
+    <style>
+        *{
+            /*color:blue;*/
+            font-family: 'Poor Story', cursive;
+        }
+        
+        h1{
+            background-color: red;
+        }
+        
+        .test {
+            font-size:20pt;
+        }
+
+        #exam{
+            text-align: center;
+        }
+        
+        .class_1{
+            background-color: yellow;
+        }
+
+        .class_2{
+            background-color: yellowgreen;
+        }
+        
+        .class_3{
+            background-color: pink;
+        }
+    </style>
+</head>
+<body>
+    <h1>form 태그 다루기</h1>
+    <form>
+        성명 : <input type ="text" class="class_1"><br>
+        암호 : <input type ="password" class="class_2"><br>
+        <!-- radio 버튼의 name 속성을 동일하게 해야 함 -->
+        과일 : <input type="radio" name="fruit">사과
+               <input type="radio" name="fruit">배
+               <input type="radio" name="fruit" checked>복숭아<br>
+        취미 : <input type="checkbox" name="hobbit">등산
+               <input type="checkbox" name="hobbit">축구
+               <input type="checkbox" name="hobbit">농구<br>
+        지역 : <select size="1"><!-- size 속성을 지정할 경우 List 형태로 표현함 -->
+                    <option value="충북">충북</option>
+                    <option vlaue="서울">서울</option> 
+                    <option vlaue="경기">경기</option> 
+                    <option vlaue="부산">부산</option> 
+              </select><br>
+              <!-- textarea cols : 글자수, rows : 행 갯수 -->
+        내용 : <br><textarea cols="50" row="6" class="class_3">입력하세요==</textarea><br>
+        <input type="file"></p>
+        <input type="button" value="회원가입하기"></p>
+        <input type="submit" value="글쓰기"></p><!-- form 내부의 속성 값을 서버로 전송-->
+        <input type="image" src="image1.jpg" width="100"><br><!-- submit과 기능 동일 -->
+    </form>
+    <p class="test">CSS 적용 연습(클래스)</p>
+    <p id="exam">CSS 적용 연습(클래스)</p>
+</body>
+</html>
