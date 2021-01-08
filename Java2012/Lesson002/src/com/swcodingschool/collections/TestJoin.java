@@ -6,7 +6,7 @@ public class TestJoin {
 	
 	TestJoin(){}
 	
-	TestJoin(String JoinID, String JoinName){
+	public TestJoin(String JoinID, String JoinName){
 		this.JoinID = JoinID;
 		this.JoinName = JoinName;
 	}
