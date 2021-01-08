@@ -9,8 +9,8 @@ import java.sql.SQLException;
  */
 public class DBUtil {
 	static final String JDBCDRV = "com.mysql.cj.jdbc.Driver"; // 정해져있는 것.
-	static final String URL = "jdbc:mysql//localhost:3306/javadb";
-	static final String DBUSER = "java";
+	static final String URL = "jdbc:mysql://localhost:3306/javadb?useUnicode=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&serverTimezone=UTC";
+	static final String DBUSER = "root"; // 집에서는 root 학원에서는 java
 	static final String DBPASSWD = "1234";
 	
 	static Connection dbconn = null;
