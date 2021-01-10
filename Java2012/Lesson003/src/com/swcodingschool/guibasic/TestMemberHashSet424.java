@@ -1,29 +1,29 @@
-package com.swcodingschool.collections;
+package com.swcodingschool.guibasic;
 
 import java.util.HashSet;
 import java.util.Iterator;
 
 public class TestMemberHashSet424 {
-	private HashSet<Member> hashSet;
+	private HashSet<TestMember> hashSet;
 	
 	TestMemberHashSet424(){
-		hashSet = new HashSet<Member>();
+		hashSet = new HashSet<TestMember>();
 	}
 	
 	// ArrayList or HashSet에 이런식으로 넣음 x list 배열이 2개가 되서 정보가 따로 저장.
 	TestMemberHashSet424(int i, String string){
-		hashSet = new HashSet<Member>();
+		hashSet = new HashSet<TestMember>();
 	}
 
-	public void addMember(Member member) {
+	public void addMember(TestMember member) {
 		hashSet.add(member);
 	}
 	
 	public boolean removeMember(int memberId) {
-		Iterator<Member> ir = hashSet.iterator();
+		Iterator<TestMember> ir = hashSet.iterator();
 		
 		while(ir.hasNext()) {
-			Member member = ir.next();
+			TestMember member = ir.next();
 			int tempId = member.getMemberId();
 			
 			if(tempId == memberId) {
@@ -37,7 +37,7 @@ public class TestMemberHashSet424 {
 	}
 	
 	public void showAllMember() {
-		for(Member member : hashSet) {
+		for(TestMember member : hashSet) {
 			System.out.println(member);
 		}
 		
