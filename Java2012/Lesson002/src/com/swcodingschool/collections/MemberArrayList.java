@@ -1,6 +1,7 @@
 package com.swcodingschool.collections;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /*
  * Member class를 ArrayList 형태로 구성
@@ -21,19 +22,27 @@ public class MemberArrayList {
 	}
 	
 	public boolean removeMember(int memberID) {
-		for(int i = 0; i < arrayList.size(); i++) {
-			Member member = arrayList.get(i);
+//		for(int i = 0; i < arrayList.size(); i++) {
+//			Member member = arrayList.get(i);
+//			
+//			int tempID = member.getMemberId();
+//			
+//			if(tempID == memberID) {
+//				arrayList.remove(i);
+//				return true;
+//			}
+		Iterator<Member> ir = arrayList.iterator();
+		while(ir.hasNext()) {
+			Member member = ir.next();
+			int tempId = member.getMemberId();
 			
-			int tempID = member.getMemberId();
-			
-			if(tempID == memberID) {
-				arrayList.remove(i);
+			if(tempId == member.getMemberId()) {
+				arrayList.remove(member);
 				return true;
 			}
-			
 		}
 		System.out.println(memberID + "가 존재하지 않습니다.");
-		return true;
+		return false;
 	}
 	
 	public void showAllMember() {
