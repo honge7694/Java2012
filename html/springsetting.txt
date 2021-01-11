@@ -9,8 +9,8 @@ lombok.jar(1.18.0)
 1. java 버전, spring 버전 수정(aspectj 와 ,slf4 버전은 나중에 수정
 
 	<properties>
-		<java-version>1.11</java-version>
-		<org.springframework-version>5.2.0.RELEASE</org.springframework-version>
+		<java-version>1.11</java-version> // 이거랑 오후 3:50 2021-01-11
+		<org.springframework-version>5.2.0.RELEASE</org.springframework-version> // 이거만 바꿈 오후 3:50 2021-01-11
 		<org.aspectj-version>1.9.0</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 	</properties>
@@ -29,10 +29,12 @@ lombok.jar(1.18.0)
                 </configuration>
             </plugin>
 
-2. Lombok 라이브러리 설치(eclipse 에 모두 반영)
+2. Lombok 라이브러리 설치(eclipse 에 모두 반영) lombok은 코드 작성 기능.
     https://projectlombok.org 에서 다운로드
-    version 1.18.0
+    cmd -> cd c:\ -> cd javaweb(집은다를수있음) -> 밑에
+    version 1.18.16
     >java -jar lombok.jar
+    -> 그리고 스프링이랑 관련된 eclipse로 연동.
 
 3. sprint-test, lombok 추가
 		<dependency>
@@ -43,7 +45,7 @@ lombok.jar(1.18.0)
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
-			<version>1.18.0</version>
+			<version>1.18.16</version>
 			<scope>provided</scope>
 		</dependency>
 
@@ -65,7 +67,7 @@ lombok.jar(1.18.0)
 
 6. window -> preferences -> java -> editor -> Save actions 수정
 
-7.  src/main/java 에 com.it.sample 패키지 생성하고 Chef 클래스 생성 후 애너테이션 테스트
+7.  src/main/java 에 com.koreait.sample 패키지 생성하고 Chef 클래스 생성 후 애너테이션 테스트
 
 @Component
 @Data
