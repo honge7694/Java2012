@@ -39,6 +39,16 @@
         #main_gnb > ul {
             overflow : hidden; /* 객체를 해당 영역에서 벗어나지 않도록 한다. */
         }
+
+        #main_gnb > ul > li {
+            float : left; /* 오른쪽에 객체를 위치할 수 있도록 설정 */
+        }
+
+        #main_gnb > ul > li > a {
+            display : block; /* block : 우측에 다른 객체를 위치 못하게 함, 반대는 inline */
+            padding : 2px 10px; /* 좌우 위아래 순서로 padding */
+            border : 1px solid black;
+        }
     </style>
 </head>
 <body>
@@ -57,7 +67,7 @@
     <div id="hedaer">
         <img src="http://placeimg.com/960/150/nature">
     </div>
-    
+
     <div id="main_lnb">
         <ul>
             <li><a href="#">메뉴1</a></li>
