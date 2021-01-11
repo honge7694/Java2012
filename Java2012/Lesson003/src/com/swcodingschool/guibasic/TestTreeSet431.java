@@ -11,11 +11,11 @@ public class TestTreeSet431 {
 		tree = new TreeSet<TestMember>();
 	}
 	
-	public void addTestMember(TestMember member) {
+	public void addMember(TestMember member) {
 		tree.add(member);
 	}
 	
-	public boolean removeTestMember(int memberId) {
+	public boolean removeMember(int memberId) {
 		Iterator<TestMember> ir = tree.iterator();
 		
 		while(ir.hasNext()) {
