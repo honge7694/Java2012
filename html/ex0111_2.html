@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin : 0; /* 바깥 여백 */
+            padding : 0; /* 안 여백 */
+        }
+
+        li{
+            list-style : none;
+        }
+
+        a {
+            text-decoration : none; /* 링크의 밑줄 제거. */
+        }
+
+        img {
+            border : 0; /* 그림 테두리 제거 */
+        }
+
+        #top_nav{
+            width : 960px;
+            height : 30px;
+            margin : 0 auto; /* 가운데 정렬 */
+            position : relative; /* 위치 상대 지정법 */
+            border : 1px solid black;
+        }
+
+        #top_nav > #main_gnb{ /* top_nav 한 단계 아래의 객체 중에서 main_gnb를 의미 */
+            position : absolute;
+            right : 0; /* 우측 정렬 */
+            top : 0;
+        }
+
+        #main_gnb > ul {
+            overflow : hidden; /* 객체를 해당 영역에서 벗어나지 않도록 한다. */
+        }
+    </style>
+</head>
+<body>
+    <div id="top_nav">
+        <div id="main_gnb">
+            <ul>
+                <li><a href="#">메뉴1</a></li>
+                <li><a href="#">메뉴2</a></li>
+                <li><a href="#">메뉴3</a></li>
+                <li><a href="#">메뉴4</a></li>
+                <li><a href="#">메뉴5</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="hedaer">
+        <img src="http://placeimg.com/960/150/nature">
+    </div>
+    
+    <div id="main_lnb">
+        <ul>
+            <li><a href="#">메뉴1</a></li>
+            <li><a href="#">메뉴2</a></li>
+            <li><a href="#">메뉴3</a></li>
+            <li><a href="#">메뉴4</a></li>
+            <li><a href="#">메뉴5</a></li>
+        </ul>
+    </div>
+    
+    <div id="contents">
+        <div id="aside">
+    
+        </div>
+        <div id="section">
+            <div id="article">
+                <p class="title">리스트</p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="footer">
+        <p>화면구현</p>
+        <p>Copyright(c) KoreaIT. All Right Reserved.</p>
+    </div>
+</body>
+</html>
