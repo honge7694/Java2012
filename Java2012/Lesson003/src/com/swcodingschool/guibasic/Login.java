@@ -1,18 +1,20 @@
 package com.swcodingschool.guibasic;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
 
 public class Login extends JFrame {
 
@@ -89,9 +91,42 @@ public class Login extends JFrame {
 				String userID = txtUserID.getText();
 				String userPWD = txtUserPWD.getText();
 				
-				System.out.println(userID);
-				System.out.println(userPWD);
+//				System.out.println(userID);
+//				System.out.println(userPWD);
 				
+				// 유저아이디와 비밀번호를 사용하여 데이터베이스 조회
+				// SELECT 속성리스트 [ * 모든 속성 all ] 
+				// FROM 테이블 이름 
+				// WHERE 조건
+				// sql 구문 구성
+				String sql = "SELECT * FROM tbluser WHERE userid=? AND userpwd=?";
+				// ?는 sql을 필요해서 적다보면 짧은걸 선호함.
+				// "SELECT * FROM tbluser WHERE userid=" + userID + "AND userpwd=?" 이런식으로해야함.
+				try {
+					// prepared statement는 sql 구문을 좀더 단순하게 구성할 수 있도록 한다.
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					pstmt.setString(1, userID); // userid 변수값으로 sql구문의 첫번째 ? 에 대입
+					pstmt.setString(2, userPWD);// userpwd 변수값으로 sql구문의 두번째 ? 에 대입
+					
+					// 최종 완성된 질의구문을 실행하고 그 결과를 ResultSet으로 받아온다.
+					ResultSet rs = pstmt.executeQuery();
+					
+					// resultset rs내에는 검색된 결과값들이 들어있는데...
+					if(rs.next()) { // 해당 계정이 있으면, 정상 로그인
+						rs.close();
+						pstmt.close();
+						//System.out.println("로그인성공");
+						// 애플리케이션을 띄워준다.
+						dispose(); // 로그인창을 닫고
+						AppHome apphome = new AppHome(); // 새 프레임을 생성하고
+						apphome.setVisible(true); // 프레임을 보이도록 한다.
+					}else {// 해당 계정이 없음
+						System.out.println("아이디와 비번을 다시 확인해주세요.");
+					}
+				}catch(SQLException elogin) {
+					System.out.println("[MyMSG]SQL Exception Error : " + elogin.getMessage());
+					elogin.printStackTrace();
+				}
 			}
 		});
 		btnLogin.setBounds(226, 180, 94, 29);
