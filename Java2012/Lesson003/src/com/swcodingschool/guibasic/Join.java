@@ -5,13 +5,13 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JRadioButton;
@@ -152,6 +152,7 @@ public class Join extends JFrame {
 					txtPWD.setText("");
 					txtConfirm.setText("");
 					System.out.println("비밀번호가 일치하지 않습니다.");
+					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
 				} else {
 
 					if (rdoMale.isSelected()) {
@@ -172,7 +173,9 @@ public class Join extends JFrame {
 						pstmt.setString(3, gender);
 						pstmt.setString(4, addr);
 
-						pstmt.executeUpdate();
+						int rs = pstmt.executeUpdate();
+						if (rs == 1)
+							JOptionPane.showMessageDialog(null, "정상적으로 저장하였습니다.");
 						
 					} catch (SQLException esave) {
 						// TODO Auto-generated catch block
