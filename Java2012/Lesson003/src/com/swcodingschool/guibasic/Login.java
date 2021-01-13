@@ -15,12 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField txtUserID;
-	private JTextField txtUserPWD;
+	private JTextField txtUserName;
+	private JPasswordField txtUserPWD;
 
 	/**
 	 * Launch the application.
@@ -61,23 +62,18 @@ public class Login extends JFrame {
 		lblNewLabel.setBounds(67, 10, 299, 65);
 		contentPane.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("User ID");
-		lblNewLabel_1.setBounds(67, 102, 57, 15);
+		JLabel lblNewLabel_1 = new JLabel("User Name");
+		lblNewLabel_1.setBounds(67, 102, 70, 15);
 		contentPane.add(lblNewLabel_1);
 		
 		JLabel lblNewLabel_2 = new JLabel("Password");
 		lblNewLabel_2.setBounds(67, 137, 57, 15);
 		contentPane.add(lblNewLabel_2);
 		
-		txtUserID = new JTextField();
-		txtUserID.setBounds(169, 99, 151, 21);
-		contentPane.add(txtUserID);
-		txtUserID.setColumns(10);
-		
-		txtUserPWD = new JTextField();
-		txtUserPWD.setBounds(169, 134, 151, 21);
-		contentPane.add(txtUserPWD);
-		txtUserPWD.setColumns(10);
+		txtUserName = new JTextField();
+		txtUserName.setBounds(169, 99, 151, 21);
+		contentPane.add(txtUserName);
+		txtUserName.setColumns(10);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.addActionListener(new ActionListener() {
@@ -88,8 +84,8 @@ public class Login extends JFrame {
 				}
 				
 				// TEXT에 입력된 유저아이디와 비밀번호를 가져온다. 
-				String userID = txtUserID.getText();
-				String userPWD = txtUserPWD.getText();
+				String username = txtUserName.getText();
+				String userpwd = new String (txtUserPWD.getPassword());
 				
 //				System.out.println(userID);
 //				System.out.println(userPWD);
@@ -99,14 +95,15 @@ public class Login extends JFrame {
 				// FROM 테이블 이름 
 				// WHERE 조건
 				// sql 구문 구성
-				String sql = "SELECT * FROM tbluser WHERE userid=? AND userpwd=?";
+				String sql = "SELECT * FROM tbluser WHERE username=? AND userpwd=?";
 				// ?는 sql을 필요해서 적다보면 짧은걸 선호함.
 				// "SELECT * FROM tbluser WHERE userid=" + userID + "AND userpwd=?" 이런식으로해야함.
 				try {
 					// prepared statement는 sql 구문을 좀더 단순하게 구성할 수 있도록 한다.
 					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
-					pstmt.setString(1, userID); // userid 변수값으로 sql구문의 첫번째 ? 에 대입
-					pstmt.setString(2, userPWD);// userpwd 변수값으로 sql구문의 두번째 ? 에 대입
+					
+					pstmt.setString(1, username); // userid 변수값으로 sql구문의 첫번째 ? 에 대입
+					pstmt.setString(2, userpwd);// userpwd 변수값으로 sql구문의 두번째 ? 에 대입
 					
 					// 최종 완성된 질의구문을 실행하고 그 결과를 ResultSet으로 받아온다.
 					ResultSet rs = pstmt.executeQuery();
@@ -131,5 +128,20 @@ public class Login extends JFrame {
 		});
 		btnLogin.setBounds(226, 180, 94, 29);
 		contentPane.add(btnLogin);
+		
+		txtUserPWD = new JPasswordField();
+		txtUserPWD.setBounds(169, 134, 151, 21);
+		contentPane.add(txtUserPWD);
+		
+		JButton btnJoin = new JButton("JOIN");
+		btnJoin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose(); // 현재 창(프레임)을 닫고
+				Join join = new Join(); // 새 창 객체 생성
+				join.setVisible(true); // 새 창 객체 보이도록
+			}
+		});
+		btnJoin.setBounds(92, 183, 97, 23);
+		contentPane.add(btnJoin);
 	}
 }
