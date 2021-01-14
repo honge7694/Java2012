@@ -153,6 +153,7 @@ public class Join extends JFrame {
 					txtConfirm.setText("");
 					System.out.println("비밀번호가 일치하지 않습니다.");
 					JOptionPane.showMessageDialog(null, "비밀번호가 일치하지 않습니다.");
+					// 공백이면 로그인 못하게.===================================================
 				} else {
 
 					if (rdoMale.isSelected()) {

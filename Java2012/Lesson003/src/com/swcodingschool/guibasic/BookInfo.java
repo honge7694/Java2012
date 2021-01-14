@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-public class AppHome extends JFrame {
+public class BookInfo extends JFrame {
 
 	private JPanel contentPane;
 
@@ -20,7 +20,7 @@ public class AppHome extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					AppHome frame = new AppHome();
+					BookInfo frame = new BookInfo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -32,7 +32,7 @@ public class AppHome extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public AppHome() {
+	public BookInfo() {
 		setTitle("Application Home");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
