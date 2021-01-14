@@ -146,7 +146,7 @@ public class Login extends JFrame {
 				join.setVisible(true); // 새 창 객체 보이도록
 			}
 		});
-		btnJoin.setBounds(92, 183, 97, 23);
+		btnJoin.setBounds(92, 180, 97, 29);
 		contentPane.add(btnJoin);
 	}
 }

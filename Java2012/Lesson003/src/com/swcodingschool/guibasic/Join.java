@@ -175,9 +175,12 @@ public class Join extends JFrame {
 						pstmt.setString(4, addr);
 
 						int rs = pstmt.executeUpdate();
-						if (rs == 1)
+						if (rs == 1) {
 							JOptionPane.showMessageDialog(null, "정상적으로 저장하였습니다.");
-						
+							dispose();
+							Login login = new Login();
+							login.setVisible(true);
+						}
 					} catch (SQLException esave) {
 						// TODO Auto-generated catch block
 						System.out.println("[MyMSG]SQL Exception Error : " + esave.getMessage());
