@@ -131,7 +131,7 @@ public class Login extends JFrame {
 				}
 			}
 		});
-		btnLogin.setBounds(226, 180, 94, 29);
+		btnLogin.setBounds(226, 180, 97, 29);
 		contentPane.add(btnLogin);
 
 		txtUserPWD = new JPasswordField();
