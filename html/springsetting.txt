@@ -346,6 +346,54 @@ public class BoardMapperTest {
 	}
 }
 
+22-7 src/main/java에 com.koreait.service 패키지 생성 및 BoardService 인터페이스 생성
+
+public interface BoardService {
+	public List<BoardVO> getList();
+}
+
+22-8 BoardServiceImpl.java 클래스 생성
+
+@Log4j
+@Service
+//@AllArgsConstructor // @Setter 2줄 대신 쓸 수 있음. 가급적으로 Setter를 쓰는게 좋음.
+public class BoardServiceImpl implements BoardService{
+	
+	@Setter(onMethod_ = @Autowired)
+	private BoardMapper mapper;
+	
+	@Override
+	public List<BoardVO> getList() {
+		log.info("Service 리스트........................");
+		return mapper.getList();
+	}
+	
+}
+
+22-8 root-context.xml에 추가
+
+ <context:component-scan base-package="com.koreait.service" />
+
+22-9 22-7~8까지 만든 것을 확인하기위해 src/test/java 에 com.koreait.controller 생성
+
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class BoardServiceTest {
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardService service;
+	
+	@Test
+	public void testGetList() {
+		log.info("Service에서 리스트함..........................");
+		service.getList().forEach(board -> log.info(service));
+	}
+	
+	
+}
+
+
 23. pom 에 log4jdbc-log4j2 설정
 
 		<dependency>
