@@ -312,7 +312,7 @@ public class BoardVO { // VO = Value Object
 	private Date b_udate;
 }
 
-22-4 com.koreait.mapper 패키지에 BoardMapper.java 생성
+22-4 com.koreait.mapper 패키지에 BoardMapper.java 인터페이스생성
 
 public interface BoardMapper {
 	public List<BoardVO> getList();
@@ -325,9 +325,11 @@ public interface BoardMapper {
 	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.mapper.BoardMapper">
+
 	<select id="getList" resultType="com.koreait.domain.BoardVO">
 		SELECT * FROM tblboard order by b_num desc
 	</select>
+
 </mapper>
 
 22-6 src/test/java 에 com.koreait.mapper 패키지 생성 후 BoardMapperTest.java 생성하여 22~22-5 까지 한거 잘실행되는지확인
@@ -374,7 +376,7 @@ public class BoardServiceImpl implements BoardService{
 
  <context:component-scan base-package="com.koreait.service" />
 
-22-9 22-7~8까지 만든 것을 확인하기위해 src/test/java 에 com.koreait.controller 생성
+22-9 22-7~8까지 만든 것을 확인하기위해 src/test/java 에 com.koreait.controller 생성 후 BoardServiceTest 클래스생성
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
@@ -393,6 +395,44 @@ public class BoardServiceTest {
 	
 }
 
+22-10 views에 board 파일 생성 후 list.jsp 만든것 놓기.
+
+22-11 com.koreait.controller에 BoardController.java 클래스 생성
+
+@Controller
+@RequestMapping("/board/*") // url 뒤에 sample을 추가하고 그 이후에 모든걸 의미하는 *
+@Log4j
+public class BoardController {
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardService service; // 여기서 만나는건 Service Mapper는 만날 수 없음.
+	
+	@GetMapping("/list")
+	public String list(Model model) {
+		
+		log.info("BoardController list 호출되었습니다................");
+		
+		model.addAttribute("list", service.getList()); //list변수로 jsp 에 넘김.
+		return "/board/list";  // 절대경로 지정
+	}
+}
+
+22-12 22-10작성한 list.jsp에 맨위에 추가.
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+
+22-13 list table 부분 수정.
+
+<c:forEach items="${list }" var="board"> <!--  BoardController에 있는 model.Attribute에 있는 변수를 가져옴.-->
+                    <tr>
+                        <td class="board_contents1">${board.b_num }</td>
+                        <td class="board_contents2">${board.b_subject }</td>
+                        <td class="board_contents3">${board.b_name }</td>
+                        <td class="board_contents4"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_wdate }"/></td>
+                        <td class="board_contents5"><fmt:formatDate pattern="yyyy-MM-dd" value="${board.b_udate }"/></td>
+                    </tr>
+</c:forEach>
 
 23. pom 에 log4jdbc-log4j2 설정
 
