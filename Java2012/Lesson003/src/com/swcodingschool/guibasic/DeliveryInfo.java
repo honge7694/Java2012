@@ -31,6 +31,8 @@ import java.awt.event.MouseEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class DeliveryInfo extends JFrame {
 
@@ -43,7 +45,8 @@ public class DeliveryInfo extends JFrame {
 	
 	private int userid4Update;
 	DefaultTableModel orderModel;
-	JComboBox cmbAddr = new JComboBox();
+	JComboBox cmbKind = new JComboBox();
+	
 
 	/**
 	 * Launch the application.
@@ -52,6 +55,7 @@ public class DeliveryInfo extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					System.out.println(DeliveryLogin.ID);
 					DeliveryInfo frame = new DeliveryInfo();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -65,6 +69,12 @@ public class DeliveryInfo extends JFrame {
 	 * Create the frame.
 	 */
 	public DeliveryInfo() {
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowOpened(WindowEvent e) {
+				LoadTbl();
+			}
+		});
 		setTitle("Delivery Info");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 724, 598);
@@ -82,8 +92,7 @@ public class DeliveryInfo extends JFrame {
 		JRadioButton rdoChicken = new JRadioButton("치킨집");
 		rdoChicken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				cmbAddr.setModel(new DefaultComboBoxModel(new String[] {"양념치킨", "후라이드치킨", "간장치킨"}));
+				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "양념치킨", "후라이드치킨", "간장치킨"}));
 			}
 		});
 		rdoChicken.setSelected(true);
@@ -95,8 +104,7 @@ public class DeliveryInfo extends JFrame {
 		JRadioButton rdoPizza = new JRadioButton("피자집");
 		rdoPizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				cmbAddr.setModel(new DefaultComboBoxModel(new String[] {"고구마피자", "불고기피자", "포테이토피자"}));
+				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "고구마피자", "불고기피자", "포테이토피자"}));
 			}
 		});
 		buttonGroup.add(rdoPizza);
@@ -106,7 +114,7 @@ public class DeliveryInfo extends JFrame {
 		JRadioButton rdoChina = new JRadioButton("중국집");
 		rdoChina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				cmbAddr.setModel(new DefaultComboBoxModel(new String[] {"짜장면", "짬뽕", "탕수육"}));
+				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "짜장면", "짬뽕", "탕수육"}));
 			}
 		});
 		buttonGroup.add(rdoChina);
@@ -119,7 +127,7 @@ public class DeliveryInfo extends JFrame {
 		lblNewLabel.setBounds(9, 10, 198, 23);
 		panel.add(lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("동네");
+		JLabel lblNewLabel_1 = new JLabel("종류");
 		lblNewLabel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel_1.setBounds(9, 90, 198, 23);
@@ -134,25 +142,25 @@ public class DeliveryInfo extends JFrame {
 		btnAdd.setBounds(9, 201, 97, 23);
 		panel.add(btnAdd);
 		
-		 cmbAddr = new JComboBox();
-		//cmbAddr.setModel(new DefaultComboBoxModel(new String[] {"우암동", "사직동", "서원동"}));
-		cmbAddr.setBounds(9, 124, 198, 23);
-		panel.add(cmbAddr);
+		 cmbKind = new JComboBox();
+		 cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "양념치킨", "후라이드치킨", "간장치킨"}));
+		cmbKind.setBounds(9, 124, 198, 23);
+		panel.add(cmbKind);
 		
-		JButton btnReset = new JButton("초기화");
-		btnReset.addActionListener(new ActionListener() {
+		JButton btnSearch = new JButton("조회하기");
+		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 				rdoChicken.setSelected(true);
 				rdoPizza.setSelected(false);
 				rdoChina.setSelected(false);
 				
-				cmbAddr.setSelectedIndex(0);
+				cmbKind.setSelectedIndex(0);
 				
 			}
 		});
-		btnReset.setBounds(113, 201, 97, 23);
-		panel.add(btnReset);
+		btnSearch.setBounds(113, 201, 97, 23);
+		panel.add(btnSearch);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBounds(12, 10, 684, 32);
@@ -163,6 +171,12 @@ public class DeliveryInfo extends JFrame {
 		lblNewLabel_3.setFont(new Font("굴림", Font.BOLD, 16));
 		lblNewLabel_3.setBounds(12, 0, 113, 32);
 		panel_1.add(lblNewLabel_3);
+		
+		JLabel lblID = new JLabel("주문");
+		lblID.setFont(new Font("굴림", Font.BOLD, 16));
+		lblID.setBounds(571, 0, 113, 32);
+		lblID.setText(DeliveryLogin.ID);
+		panel_1.add(lblID);
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(12, 279, 684, 32);
@@ -257,9 +271,10 @@ public class DeliveryInfo extends JFrame {
 	private void LoadTbl() {
 		orderModel = new DefaultTableModel();
 		orderModel.addColumn("ID");
-		orderModel.addColumn("음식점명");
-		orderModel.addColumn("음  식");
+		orderModel.addColumn("종  류");
+		orderModel.addColumn("메  뉴");
 		orderModel.addColumn("주  소");
+		orderModel.addColumn("번  호");
 		orderModel.addColumn("가  격");
 		
 		if(DBUtil.dbconn == null){
@@ -274,11 +289,12 @@ public class DeliveryInfo extends JFrame {
 			
 			while(rs.next()){
 				orderModel.addRow(new Object[] {
-					rs.getInt(1),    // bookid
-					rs.getString(2), // title
-					rs.getString(3), // author
-					rs.getInt(4), // publisherid
-					rs.getInt(5) 	 // price
+					rs.getInt(1),    // idx
+					rs.getString(2), // kind
+					rs.getString(3), // menu
+					rs.getString(4), // addr
+					rs.getString(5), // number
+					rs.getString(6)  // price
 				});
 			}// end of while()
 			rs.close();
@@ -286,11 +302,12 @@ public class DeliveryInfo extends JFrame {
 			
 			tblOrder.setModel(orderModel);
 			tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
-			tblOrder.getColumnModel().getColumn(0).setPreferredWidth(30); // bookid
-			tblOrder.getColumnModel().getColumn(1).setPreferredWidth(150); // title
-			tblOrder.getColumnModel().getColumn(2).setPreferredWidth(50); // author
-			tblOrder.getColumnModel().getColumn(3).setPreferredWidth(50); // publisher
-			tblOrder.getColumnModel().getColumn(4).setPreferredWidth(50); // price
+			tblOrder.getColumnModel().getColumn(0).setPreferredWidth(30); // idx
+			tblOrder.getColumnModel().getColumn(1).setPreferredWidth(120); // kind
+			tblOrder.getColumnModel().getColumn(2).setPreferredWidth(80); // menu
+			tblOrder.getColumnModel().getColumn(3).setPreferredWidth(80); // addr
+			tblOrder.getColumnModel().getColumn(4).setPreferredWidth(80); // number
+			tblOrder.getColumnModel().getColumn(5).setPreferredWidth(50); // price
 			
 			JOptionPane.showMessageDialog(null, "테이블을 로딩하였습니다.");
 			
@@ -298,7 +315,6 @@ public class DeliveryInfo extends JFrame {
 			JOptionPane.showMessageDialog(null, "[MyMSG] 테이블 로딩 오류");
 			eload.printStackTrace();
 		}
-			 
-		
 	}// end of LoadTbl()
+	
 }// end of class

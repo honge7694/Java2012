@@ -24,7 +24,8 @@ public class DeliveryLogin extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtUserID;
 	private JPasswordField txtUserPWD;
-	public static String ID;
+	static String ID = null;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -91,7 +92,7 @@ public class DeliveryLogin extends JFrame {
 							DeliveryInfo info = new DeliveryInfo();
 							info.setVisible(true);
 							
-							ID = txtUserID.getText(); // 로그인한 아이디 보기.
+							ID = txtUserID.getText();
 							dispose();
 						}
 					}else {

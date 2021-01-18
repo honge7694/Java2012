@@ -182,6 +182,8 @@ public class DeliveryJoin extends JFrame {
 		btnExit.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				DBUtil.dbconn = null;
+				
 				DeliveryLogin login = new DeliveryLogin();
 				login.setVisible(true);
 			}
