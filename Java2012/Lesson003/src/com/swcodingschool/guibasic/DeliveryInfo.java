@@ -33,12 +33,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import javax.swing.JTextArea;
 
 public class DeliveryInfo extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtAllPrice;
-	private JTextField txtOrderFood;
 	private JTable tblOrder;
 	private JTable tblOrderList;
 	private final ButtonGroup buttonGroup = new ButtonGroup();
@@ -46,6 +46,8 @@ public class DeliveryInfo extends JFrame {
 	private int userid4Update;
 	DefaultTableModel orderModel;
 	JComboBox cmbKind = new JComboBox();
+	private int kindCriteria = 99;
+	private String srchKind = null;
 	
 
 	/**
@@ -93,6 +95,7 @@ public class DeliveryInfo extends JFrame {
 		rdoChicken.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "양념치킨", "후라이드치킨", "간장치킨"}));
+				srchKind = "치킨";
 			}
 		});
 		rdoChicken.setSelected(true);
@@ -105,6 +108,7 @@ public class DeliveryInfo extends JFrame {
 		rdoPizza.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "고구마피자", "불고기피자", "포테이토피자"}));
+				srchKind = "피자";
 			}
 		});
 		buttonGroup.add(rdoPizza);
@@ -115,6 +119,7 @@ public class DeliveryInfo extends JFrame {
 		rdoChina.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "짜장면", "짬뽕", "탕수육"}));
+				srchKind = "중국";
 			}
 		});
 		buttonGroup.add(rdoChina);
@@ -151,12 +156,113 @@ public class DeliveryInfo extends JFrame {
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				rdoChicken.setSelected(true);
-				rdoPizza.setSelected(false);
-				rdoChina.setSelected(false);
+				String sql = "";
 				
-				cmbKind.setSelectedIndex(0);
+				orderModel = new DefaultTableModel();
+				orderModel.addColumn("ID");
+				orderModel.addColumn("종  류");
+				orderModel.addColumn("메  뉴");
+				orderModel.addColumn("주  소");
+				orderModel.addColumn("번  호");
+				orderModel.addColumn("가  격");
 				
+				kindCriteria = cmbKind.getSelectedIndex();
+				
+				if(rdoChicken.isSelected()) {
+					switch(kindCriteria) {	
+						case 0 : // 전체 치킨
+							sql = "SELECT * FROM delivery WHERE kind like ?";
+							break;
+					
+						case 1 : // 양념 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 2 : // 후라이드 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 3 : // 간장 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+					}
+				} // rdoChicken
+				
+				if(rdoPizza.isSelected()) {
+					switch(kindCriteria) {	
+						case 0 : // 전체 피자
+							sql = "SELECT * FROM delivery WHERE kind like ?";
+							break;
+					
+						case 1 : // 고구마 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 2 : // 불고기 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 3 : // 포테이토 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+					}
+				} // rdoPizza
+				
+				if(rdoChina.isSelected()) {
+					switch(kindCriteria) {	
+						case 0 : // 전체 
+							sql = "SELECT * FROM delivery WHERE kind like ?";
+							break;
+					
+						case 1 : // 짜장
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 2 : // 짬뽕
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+							
+						case 3 : // 탕수육
+							sql = "SELECT * FROM delivery WHERE menu like ?";
+							break;
+					}
+				} // rdoChina
+				
+				try {
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					if(kindCriteria != 0) {
+						pstmt.setString(1, "%" + cmbKind.getSelectedItem().toString() +"%");
+					}else if(kindCriteria == 0) {
+						pstmt.setString(1, "%" + srchKind +"%");
+					}
+					System.out.println(cmbKind.getSelectedItem().toString());
+					ResultSet rs = pstmt.executeQuery();
+					while(rs.next()){
+						orderModel.addRow(new Object[] {
+								rs.getInt(1),		// idx
+								rs.getString(2),	// kind
+								rs.getString(3),	// menu
+								rs.getString(4),	// number
+								rs.getString(5),	// addr
+								rs.getString(6)		// price
+						});
+					}
+					
+					rs.close();
+					pstmt.close();
+					
+					tblOrder.setModel(orderModel);
+					tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
+					tblOrder.getColumnModel().getColumn(0).setPreferredWidth(30); // idx
+					tblOrder.getColumnModel().getColumn(1).setPreferredWidth(120); // kind
+					tblOrder.getColumnModel().getColumn(2).setPreferredWidth(80); // menu
+					tblOrder.getColumnModel().getColumn(3).setPreferredWidth(80); // addr
+					tblOrder.getColumnModel().getColumn(4).setPreferredWidth(80); // number
+					tblOrder.getColumnModel().getColumn(5).setPreferredWidth(50); // price
+				} catch (SQLException esearch) {
+					JOptionPane.showMessageDialog(null, "테이블 로딩 중 오류가 발생하였습니다.");
+					esearch.printStackTrace();
+				}
 			}
 		});
 		btnSearch.setBounds(113, 201, 97, 23);
@@ -215,16 +321,18 @@ public class DeliveryInfo extends JFrame {
 		btnDel.setBounds(6, 203, 97, 23);
 		panel_2.add(btnDel);
 		
-		JButton btnOk = new JButton("저장하기");
+		JButton btnOk = new JButton("계산하기");
+		btnOk.setActionCommand("");
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// 주문할 음식 저장.
+				// 주문할 음식 계산.
 			}
 		});
 		btnOk.setBounds(111, 203, 97, 23);
 		panel_2.add(btnOk);
 		
 		txtAllPrice = new JTextField();
+		txtAllPrice.setBorder(null);
 		txtAllPrice.setEditable(false);
 		txtAllPrice.setBackground(SystemColor.controlHighlight);
 		txtAllPrice.setHorizontalAlignment(SwingConstants.CENTER);
@@ -232,13 +340,11 @@ public class DeliveryInfo extends JFrame {
 		panel_2.add(txtAllPrice);
 		txtAllPrice.setColumns(10);
 		
-		txtOrderFood = new JTextField();
-		txtOrderFood.setHorizontalAlignment(SwingConstants.CENTER);
-		txtOrderFood.setEditable(false);
-		txtOrderFood.setColumns(10);
-		txtOrderFood.setBackground(SystemColor.controlHighlight);
-		txtOrderFood.setBounds(10, 123, 198, 21);
-		panel_2.add(txtOrderFood);
+		JTextArea textArea = new JTextArea();
+		textArea.setEditable(false);
+		textArea.setBackground(SystemColor.controlHighlight);
+		textArea.setBounds(9, 119, 198, 74);
+		panel_2.add(textArea);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(243, 58, 453, 211);
@@ -316,5 +422,4 @@ public class DeliveryInfo extends JFrame {
 			eload.printStackTrace();
 		}
 	}// end of LoadTbl()
-	
 }// end of class
