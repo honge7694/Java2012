@@ -99,6 +99,7 @@ public class Login extends JFrame {
 				// ?는 sql을 필요해서 적다보면 짧은걸 선호함.
 				// "SELECT * FROM tbluser WHERE userid=" + userID + "AND userpwd=?" 이런식으로해야함.
 				try {
+
 					// prepared statement는 sql 구문을 좀더 단순하게 구성할 수 있도록 한다.
 					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
 

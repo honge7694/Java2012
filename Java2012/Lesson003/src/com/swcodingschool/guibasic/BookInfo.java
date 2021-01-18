@@ -140,6 +140,11 @@ public class BookInfo extends JFrame {
 					pstmt.execute();
 					LoadTbl();
 					
+					txtTitle.setText("");
+					txtAuthor.setText("");
+					txtPublisherID.setText("");
+					txtPrice.setText("");
+					
 				}catch(SQLException esave) {
 					JOptionPane.showMessageDialog(null, "등록에 오류가 발생했습니다.");
 					esave.printStackTrace();
@@ -176,6 +181,11 @@ public class BookInfo extends JFrame {
 					btnReset.setEnabled(true);
 					btnReload.setEnabled(true);
 					
+					txtTitle.setText("");
+					txtAuthor.setText("");
+					txtPublisherID.setText("");
+					txtPrice.setText("");
+					
 				}catch(SQLException eupdate){
 					JOptionPane.showMessageDialog(null, "업데이트에 오류가 발생했습니다.");
 					eupdate.printStackTrace();
@@ -196,6 +206,12 @@ public class BookInfo extends JFrame {
 					
 					pstmt.setInt(1, bookid4update);
 					pstmt.execute();
+					
+					txtTitle.setText("");
+					txtAuthor.setText("");
+					txtPublisherID.setText("");
+					txtPrice.setText("");
+					
 					LoadTbl();
 				} catch (SQLException edelete) {
 					JOptionPane.showMessageDialog(null, "제거 오류가 발생했습니다.");
@@ -222,11 +238,11 @@ public class BookInfo extends JFrame {
 			public void mouseClicked(MouseEvent e) {
 				// 테이블의 특정 행을 마우스로 클릭했을 때
 				int row = tblTitle.getSelectedRow();
-				bookid4update = Integer.parseInt(tblTitle.getModel().getValueAt(row, 0).toString()); // tblTitle에서 모델을 받은 후 값을 받고 그 값을 String 바꾼후 정수형으로 변환.
+				// tblTitle에서 모델을 받은 후 값을 받고 그 값을 String 바꾼후 정수형으로 변환.
+				bookid4update = Integer.parseInt(tblTitle.getModel().getValueAt(row, 0).toString());
 				
 				// reset과 save를 disalbe하게 한다.
 				btnSave.setEnabled(false);
-				
 				btnReload.setEnabled(false);
 				
 				// 해당 레코드의 id를 이용하여 필드값을 채우는 메서드를 호출

@@ -353,6 +353,32 @@ public class UserManager extends JFrame {
 				// 업데이트 버튼을 클릭했을 때
 				// 텍스트 필드의 값을 임시변수로 취하고
 				// sql구문구성 후 prepared statement로 완성, 질의처리를 진행한다.
+				String sql = "UPDATE tbluser SET username = ?, gender = ?, addr = ? WHERE userid = ?";
+				
+				String username = txtUserName.getText();
+				String useraddr = txtAddress.getText();
+				try {
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					pstmt.setString(1, username);
+					pstmt.setString(2, newgender);
+					pstmt.setString(3, useraddr);
+					pstmt.setInt(4, userid4update);
+					
+					pstmt.execute();
+					JOptionPane.showMessageDialog(null, "업데이트 완료 하였습니다.");
+					
+					txtUserName.setText("");
+					rdoMale.setSelected(false);
+					rdoFemale.setSelected(false);
+					txtAddress.setText("");
+					
+					LoadTbl();
+					
+				} catch (SQLException eupdate) {
+					JOptionPane.showMessageDialog(null, "업데이트 오류가 발생하였습니다.");
+					eupdate.printStackTrace();
+				} 
+				
 
 			}
 		});
@@ -365,6 +391,26 @@ public class UserManager extends JFrame {
 				// 삭제 버튼을 클릭했을 때
 				// 임시값으로 보관된 사용자아이디값을 이용하여
 				// sql구문을 구성하고 prepared statement 완성, 질의처리를 진행한다.
+				String sql = "DELETE FROM tbluser WHERE userid = ?";
+				
+				try {
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					
+					pstmt.setInt(1, userid4update);
+					pstmt.execute();
+					
+					JOptionPane.showMessageDialog(null, "삭제 완료하였습니다.");
+					txtUserName.setText("");
+					rdoMale.setSelected(false);
+					rdoFemale.setSelected(false);
+					txtAddress.setText("");
+					
+					LoadTbl();
+					
+				} catch (SQLException edelete) {
+					JOptionPane.showMessageDialog(null, "삭제 오류가 발생하였습니다.");
+					edelete.printStackTrace();
+				}
 
 			}
 		});
