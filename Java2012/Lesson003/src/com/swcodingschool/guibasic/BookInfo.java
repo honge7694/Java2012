@@ -100,10 +100,52 @@ public class BookInfo extends JFrame {
 		contentPane.add(lblNewLabel);
 		
 		btnReset = new JButton("Reset");
+		btnReset.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				txtTitle.setText("");
+				txtAuthor.setText("");
+				txtPublisherID.setText("");
+				txtPrice.setText("");
+				
+				// reset과 save를 disalbe하게 한다.
+				btnSave.setEnabled(true);
+				btnReset.setEnabled(true);
+				btnReload.setEnabled(true);
+			}
+		});
 		btnReset.setBounds(10, 368, 96, 32);
 		contentPane.add(btnReset);
 		
 		btnSave = new JButton("Save");
+		btnSave.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+				String sql = "INSERT INTO tblBook(title, author, publisherid, price) VALUES (?, ?, ?, ?)";
+				
+				String title = txtTitle.getText();
+				String author = txtAuthor.getText();
+				String publisherid = txtPublisherID.getText();
+				String price = txtPrice.getText();
+				
+				
+				try {
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					
+					pstmt.setString(1, title);
+					pstmt.setString(2, author);
+					pstmt.setString(3, publisherid);
+					pstmt.setString(4, price);
+					
+					pstmt.execute();
+					LoadTbl();
+					
+				}catch(SQLException esave) {
+					JOptionPane.showMessageDialog(null, "등록에 오류가 발생했습니다.");
+					esave.printStackTrace();
+				}
+			}
+		});
 		btnSave.setBounds(116, 368, 96, 32);
 		contentPane.add(btnSave);
 		
@@ -129,6 +171,11 @@ public class BookInfo extends JFrame {
 					pstmt.execute();
 					LoadTbl();
 					
+					// reset과 save를 되돌린다.
+					btnSave.setEnabled(true);
+					btnReset.setEnabled(true);
+					btnReload.setEnabled(true);
+					
 				}catch(SQLException eupdate){
 					JOptionPane.showMessageDialog(null, "업데이트에 오류가 발생했습니다.");
 					eupdate.printStackTrace();
@@ -140,6 +187,24 @@ public class BookInfo extends JFrame {
 		contentPane.add(btnUpdate);
 		
 		btnDelete = new JButton("Delete");
+		btnDelete.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String sql = "DELETE FROM tblBook WHERE bookid = ? ";
+				
+				try {
+					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
+					
+					pstmt.setInt(1, bookid4update);
+					pstmt.execute();
+					LoadTbl();
+				} catch (SQLException edelete) {
+					JOptionPane.showMessageDialog(null, "제거 오류가 발생했습니다.");
+					edelete.printStackTrace();
+				}
+				
+				
+			}
+		});
 		btnDelete.setBounds(328, 368, 96, 32);
 		contentPane.add(btnDelete);
 		
@@ -161,7 +226,7 @@ public class BookInfo extends JFrame {
 				
 				// reset과 save를 disalbe하게 한다.
 				btnSave.setEnabled(false);
-				btnReset.setEnabled(false);
+				
 				btnReload.setEnabled(false);
 				
 				// 해당 레코드의 id를 이용하여 필드값을 채우는 메서드를 호출
