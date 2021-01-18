@@ -28,3 +28,28 @@
 
  
 ### https://gist.github.com/ihoneymon/652be052a0727ad59601
+
+FOREIGN KEY (task_id) REFERENCES tasks (task_id) ON UPDATE RESTRICT ON DELETE CASCADE
+
+
+음식점.  (배민)
+
+1. 로그인, 회원가입
+2. 음식점 리스트 쭈우우욱
+3. 라디오 버튼으로 메뉴별 리스트 나타내기 
+4. 콤보박스로 동네별 리스트 나타내기
+5. 리스트에 메뉴이름과 가격.
+
+
+
+idx, 음식점명, 취급음식, 주소 (INNER JOIN 동별 우암동, 사직동, 서원동), 가격
+
+
+
+6. 로그인한 사람 주문리스트.
+7. 관리자는 음식과 회원관리를 할 수 있게함.   
+8.  
+9.
+
+
+
