@@ -89,10 +89,10 @@ public class DeliveryLogin extends JFrame {
 
 						} else {
 							// 음식점 목록으로 가기.
+							ID = txtUserID.getText();
 							DeliveryInfo info = new DeliveryInfo();
 							info.setVisible(true);
 							
-							ID = txtUserID.getText();
 							dispose();
 						}
 					}else {

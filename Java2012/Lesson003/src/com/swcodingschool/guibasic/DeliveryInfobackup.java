@@ -35,7 +35,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.JTextArea;
 
-public class DeliveryInfo extends JFrame {
+public class DeliveryInfobackup extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField txtAllPrice;
@@ -45,18 +45,16 @@ public class DeliveryInfo extends JFrame {
 	
 	private int userid4Update;
 	DefaultTableModel orderModel;
-	DefaultTableModel orderListModel;
 	JComboBox cmbKind = new JComboBox();
 	private int kindCriteria = 99;
 	private String srchKind = null;
 	
-	
+	private String orKind;
 	private String orMenu;
+	private String orAddr;
+	private String orNumber;
 	private String orPrice;
-	private String orExplanation;
 
-	private int orderNumb = 1;
-	
 	/**
 	 * Launch the application.
 	 */
@@ -65,7 +63,7 @@ public class DeliveryInfo extends JFrame {
 			public void run() {
 				try {
 					System.out.println(DeliveryLogin.ID);
-					DeliveryInfo frame = new DeliveryInfo();
+					DeliveryInfobackup frame = new DeliveryInfobackup();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -77,12 +75,11 @@ public class DeliveryInfo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public DeliveryInfo() {
+	public DeliveryInfobackup() {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowOpened(WindowEvent e) {
 				LoadTbl();
-				LoadOrderTbl();
 			}
 		});
 		setTitle("Delivery Info");
@@ -147,76 +144,51 @@ public class DeliveryInfo extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		JButton btnAdd = new JButton("추가하기");
-		btnAdd.setEnabled(false);
 		btnAdd.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 주문 추가하기.
-				System.out.println(orMenu + orPrice + orExplanation + DeliveryLogin.ID);
-				
-				//orMenu;  orPrice;  orExplanation;
-				String sql = "INSERT INTO orderList(menu, price, explanation, userid) VALUES (?, ?, ?, ?)";
-				try {
-					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
-					
-					pstmt.setString(1, orMenu);
-					pstmt.setString(2, orPrice);
-					pstmt.setString(3, orExplanation);
-					pstmt.setString(4, DeliveryLogin.ID);
-					
-					
-					int rs = pstmt.executeUpdate();
-					if(rs == 1) {
-						JOptionPane.showMessageDialog(null, "메뉴가 추가되었습니다.");
-						LoadOrderTbl();
-					}
-					
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
-				
-				
-				btnAdd.setEnabled(false);
 			}
 		});
 		btnAdd.setBounds(9, 201, 97, 23);
 		panel.add(btnAdd);
 		
 		cmbKind = new JComboBox();
-		cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "푸라닭", "BBQ", "BHC"}));
+		cmbKind.setModel(new DefaultComboBoxModel(new String[] {"전체", "시카고피자", "찹쌀피자", "피자마루"}));
 		cmbKind.setBounds(9, 124, 198, 23);
 		panel.add(cmbKind);
 		
 		JButton btnSearch = new JButton("조회하기");
 		btnSearch.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				btnAdd.setEnabled(false);
 				
 				String sql = "";
 				
 				orderModel = new DefaultTableModel();
-				orderModel.addColumn("");
+				orderModel.addColumn("ID");
+				orderModel.addColumn("종  류");
 				orderModel.addColumn("메  뉴");
+				orderModel.addColumn("주  소");
+				orderModel.addColumn("번  호");
 				orderModel.addColumn("가  격");
-				orderModel.addColumn("설  명");
 				
 				kindCriteria = cmbKind.getSelectedIndex();
 				
 				if(rdoChicken.isSelected()) {
 					switch(kindCriteria) {	
 						case 0 : // 전체 치킨
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE kind like ?";
+							sql = "SELECT * FROM delivery WHERE kind like ?";
 							break;
 					
-						case 1 : // 푸라닭 치킨
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 1 : // 양념 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
-						case 2 : // BBQ 치킨
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 2 : // 후라이드 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
-						case 3 : // BHC 치킨
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 3 : // 간장 치킨
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 					}
 				} // rdoChicken
@@ -224,19 +196,19 @@ public class DeliveryInfo extends JFrame {
 				if(rdoPizza.isSelected()) {
 					switch(kindCriteria) {	
 						case 0 : // 전체 피자
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE kind like ?";
+							sql = "SELECT * FROM delivery WHERE kind like ?";
 							break;
 					
-						case 1 : // 시카고 피자
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 1 : // 고구마 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
-						case 2 : // 찹쌀 피자
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 2 : // 불고기 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
-						case 3 : // 피자명 피자
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE company like ?";
+						case 3 : // 포테이토 피자
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 					}
 				} // rdoPizza
@@ -244,19 +216,19 @@ public class DeliveryInfo extends JFrame {
 				if(rdoChina.isSelected()) {
 					switch(kindCriteria) {	
 						case 0 : // 전체 
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE kind like ?";
+							sql = "SELECT * FROM delivery WHERE kind like ?";
 							break;
 					
 						case 1 : // 짜장
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE menu like ?";
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
 						case 2 : // 짬뽕
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE menu like ?";
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 							
 						case 3 : // 탕수육
-							sql = "SELECT idx, menu, price, explanation FROM delivery WHERE menu like ?";
+							sql = "SELECT * FROM delivery WHERE menu like ?";
 							break;
 					}
 				} // rdoChina
@@ -272,27 +244,26 @@ public class DeliveryInfo extends JFrame {
 					ResultSet rs = pstmt.executeQuery();
 					while(rs.next()){
 						orderModel.addRow(new Object[] {
-							rs.getInt(1),    // idx
-//							rs.getString(2), // kind
-//							rs.getString(3), // company
-							rs.getString(2), // menu
-							rs.getString(3), // price
-//							rs.getString(6), // num
-//							rs.getString(7), // addr
-							rs.getString(4)  // explanation
+								rs.getInt(1),		// idx
+								rs.getString(2),	// kind
+								rs.getString(3),	// menu
+								rs.getString(4),	// number
+								rs.getString(5),	// addr
+								rs.getString(6)		// price
 						});
-					}// end of while()
+					}
 					
 					rs.close();
 					pstmt.close();
 					
 					tblOrder.setModel(orderModel);
-					//tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
+					tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
 					tblOrder.getColumnModel().getColumn(0).setPreferredWidth(30); // idx
-					tblOrder.getColumnModel().getColumn(1).setPreferredWidth(70); // menu
-					tblOrder.getColumnModel().getColumn(2).setPreferredWidth(70); // price
-					tblOrder.getColumnModel().getColumn(3).setPreferredWidth(150); // explanation
-					
+					tblOrder.getColumnModel().getColumn(1).setPreferredWidth(120); // kind
+					tblOrder.getColumnModel().getColumn(2).setPreferredWidth(80); // menu
+					tblOrder.getColumnModel().getColumn(3).setPreferredWidth(80); // addr
+					tblOrder.getColumnModel().getColumn(4).setPreferredWidth(80); // number
+					tblOrder.getColumnModel().getColumn(5).setPreferredWidth(50); // price
 				} catch (SQLException esearch) {
 					JOptionPane.showMessageDialog(null, "테이블 로딩 중 오류가 발생하였습니다.");
 					esearch.printStackTrace();
@@ -314,14 +285,9 @@ public class DeliveryInfo extends JFrame {
 		
 		JLabel lblID = new JLabel("주문");
 		lblID.setFont(new Font("굴림", Font.BOLD, 16));
-		lblID.setBounds(522, 0, 113, 32);
+		lblID.setBounds(571, 0, 113, 32);
 		lblID.setText(DeliveryLogin.ID);
 		panel_1.add(lblID);
-		
-		JLabel lblID_1 = new JLabel("님 환영합니다.");
-		lblID_1.setFont(new Font("굴림", Font.BOLD, 16));
-		lblID_1.setBounds(571, 0, 113, 32);
-		panel_1.add(lblID_1);
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBounds(12, 279, 684, 32);
@@ -351,17 +317,10 @@ public class DeliveryInfo extends JFrame {
 		panel_2.add(lblNewLabel_1_1);
 		
 		JButton btnDel = new JButton("제거하기");
-		btnDel.setEnabled(false);
 		btnDel.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 주문할 음식 제거하기
-				String sql = "DELETE FROM orderList WHERE idx = ?";
 				
-				try {
-					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
-				} catch (SQLException e1) {
-					e1.printStackTrace();
-				}
 			}
 		});
 		btnDel.setBounds(6, 203, 97, 23);
@@ -406,9 +365,8 @@ public class DeliveryInfo extends JFrame {
 				// 호출된 메서드에서는 아이디값을 이용하여 데이터를 검색하여
 				// 데이터아이템 텍스트필드에 뿌려준다.
 				int row = tblOrder.getSelectedRow();
-				btnAdd.setEnabled(true);
+				
 				userid4Update = Integer.parseInt(tblOrder.getModel().getValueAt(row, 0).toString());
-				setTxtField(userid4Update);
 			}
 		});
 		scrollPane.setViewportView(tblOrder);
@@ -423,17 +381,18 @@ public class DeliveryInfo extends JFrame {
 	
 	private void LoadTbl() {
 		orderModel = new DefaultTableModel();
-		orderModel.addColumn("");
+		orderModel.addColumn("ID");
+		orderModel.addColumn("종  류");
 		orderModel.addColumn("메  뉴");
+		orderModel.addColumn("주  소");
+		orderModel.addColumn("번  호");
 		orderModel.addColumn("가  격");
-		orderModel.addColumn("설  명");
-		
 		
 		if(DBUtil.dbconn == null){
 			DBUtil.DBConnect();
 		}
 		
-		String sql = "SELECT idx, menu, price, explanation FROM delivery";
+		String sql = "SELECT * FROM delivery";
 		
 		try {
 			PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
@@ -442,27 +401,24 @@ public class DeliveryInfo extends JFrame {
 			while(rs.next()){
 				orderModel.addRow(new Object[] {
 					rs.getInt(1),    // idx
-//					rs.getString(2), // kind
-//					rs.getString(3), // company
-					rs.getString(2), // menu
-					rs.getString(3), // price
-//					rs.getString(6), // num
-//					rs.getString(7), // addr
-					rs.getString(4)  // explanation
+					rs.getString(2), // kind
+					rs.getString(3), // menu
+					rs.getString(4), // addr
+					rs.getString(5), // number
+					rs.getString(6)  // price
 				});
 			}// end of while()
 			rs.close();
 			pstmt.close();
 			
 			tblOrder.setModel(orderModel);
-			//tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
-			tblOrder.getColumnModel().getColumn(0).setPreferredWidth(0); // idx
-			tblOrder.getColumnModel().getColumn(1).setPreferredWidth(70); // menu
-			tblOrder.getColumnModel().getColumn(2).setPreferredWidth(70); // price
-			tblOrder.getColumnModel().getColumn(3).setPreferredWidth(150); // explanation
-			
-			
-			
+			tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
+			tblOrder.getColumnModel().getColumn(0).setPreferredWidth(30); // idx
+			tblOrder.getColumnModel().getColumn(1).setPreferredWidth(120); // kind
+			tblOrder.getColumnModel().getColumn(2).setPreferredWidth(80); // menu
+			tblOrder.getColumnModel().getColumn(3).setPreferredWidth(80); // addr
+			tblOrder.getColumnModel().getColumn(4).setPreferredWidth(80); // number
+			tblOrder.getColumnModel().getColumn(5).setPreferredWidth(50); // price
 			
 			JOptionPane.showMessageDialog(null, "테이블을 로딩하였습니다.");
 			
@@ -473,66 +429,23 @@ public class DeliveryInfo extends JFrame {
 	}// end of LoadTbl()
 	
 	private void setTxtField(int idx) {
-		String sql = "SELECT idx, menu, price, explanation FROM delivery where idx = ?";
+		String sql = "SELECT * FROM delivery WHERE idx = ?";
 		
 		try {
 			PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
 			pstmt.setInt(1,idx);
 			ResultSet rs = pstmt.executeQuery();
 			while(rs.next()) {
-				orMenu = rs.getString(2);
-				orPrice = rs.getString(3);
-				orExplanation = rs.getString(4);
+				orKind = rs.getString(2);
+				orMenu = rs.getString(3);
+				orAddr = rs.getString(4);
+				orNumber = rs.getString(5);
+				orPrice = rs.getString(6);
 			}
 		}catch(SQLException eset) {
 			eset.printStackTrace();
 		}
 		
 		
-	} // end of setTxtField
-	
-	private void LoadOrderTbl() {
-		orderListModel = new DefaultTableModel();
-		orderListModel.addColumn("");
-		orderListModel.addColumn("메  뉴");
-		orderListModel.addColumn("가  격");
-		orderListModel.addColumn("설  명");
-		
-		
-		if(DBUtil.dbconn == null){
-			DBUtil.DBConnect();
-		}
-		
-		String sql = "SELECT idx, menu, price, explanation FROM orderList WHERE userid = ?";
-		
-		try {
-			PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
-			pstmt.setString(1, DeliveryLogin.ID);
-			
-			ResultSet rs = pstmt.executeQuery();
-			while(rs.next()){
-				orderListModel.addRow(new Object[] {
-					rs.getInt(1),    // idx
-					rs.getString(2), // menu
-					rs.getString(3), // price
-					rs.getString(4)  // explanation
-				});
-			}// end of while()
-			
-			rs.close();
-			pstmt.close();
-			
-			tblOrderList.setModel(orderListModel);
-			//tblOrder.setAutoResizeMode(0); // 테이블의 크기를 자동 조정해준다.
-			tblOrderList.getColumnModel().getColumn(0).setPreferredWidth(0); // idx
-			tblOrderList.getColumnModel().getColumn(1).setPreferredWidth(70); // menu
-			tblOrderList.getColumnModel().getColumn(2).setPreferredWidth(70); // price
-			tblOrderList.getColumnModel().getColumn(3).setPreferredWidth(150); // explanation
-			
-		} catch (SQLException eload) {
-			JOptionPane.showMessageDialog(null, "[MyMSG] 테이블 로딩 오류");
-			eload.printStackTrace();
-		}
-	}// end of LoadOrderTbl()
-	
+	}
 }// end of class
