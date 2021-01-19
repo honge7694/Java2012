@@ -29,5 +29,9 @@
  
 ### https://gist.github.com/ihoneymon/652be052a0727ad59601
 
-FOREIGN KEY (task_id) REFERENCES tasks (task_id) ON UPDATE RESTRICT ON DELETE CASCADE
+### https://www.oracle.com/downloads/ SQL Developer
+
+### https://www.oracle.com/database/technologies/oracle-database-software-downloads.html#19c 오라클 다운로드
+
+### https://www.oracle.com/database/technologies/appdev/jdbc-ucp-19c-downloads.html jdbc 다운로드 오라클용
 
