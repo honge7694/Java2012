@@ -22,6 +22,7 @@ import javax.swing.DefaultComboBoxModel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.SystemColor;
+import java.awt.TextArea;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JTable;
@@ -49,6 +50,8 @@ public class DeliveryInfo extends JFrame {
 	DefaultTableModel orderModel;
 	DefaultTableModel orderListModel;
 	JComboBox cmbKind = new JComboBox();
+	private JTextArea textArea;
+	
 	private int kindCriteria = 99;
 	private String srchKind = null;
 
@@ -376,7 +379,7 @@ public class DeliveryInfo extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 주문할 음식 계산.
-				String sql = "SELECT sum(price) FROM orderList WHERE userid = ?";
+				String sql = "SELECT sum(price), menu FROM orderList WHERE userid = ?";
 				
 				try {
 					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
@@ -386,6 +389,8 @@ public class DeliveryInfo extends JFrame {
 					
 					while(rs.next()) {
 						txtAllPrice.setText(rs.getString(1)); 
+						textArea.append(rs.getString(2) + "\n");
+						
 					}
 					
 					pstmt.close();
