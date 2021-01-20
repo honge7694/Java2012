@@ -1,40 +1,39 @@
 package com.swcodingschool.guibasic;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTabbedPane;
-import javax.swing.JScrollPane;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JRadioButton;
-import javax.swing.SwingConstants;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.border.LineBorder;
-import javax.swing.table.DefaultTableModel;
-
 import java.awt.Color;
-import javax.swing.DefaultComboBoxModel;
+import java.awt.EventQueue;
 import java.awt.Font;
-import javax.swing.JTextField;
 import java.awt.SystemColor;
-import java.awt.TextArea;
-import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import javax.swing.JTable;
-import javax.swing.ButtonGroup;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+
+import javax.swing.ButtonGroup;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
+import javax.swing.table.DefaultTableModel;
+
+
 
 public class DeliveryInfo extends JFrame {
 
@@ -378,7 +377,9 @@ public class DeliveryInfo extends JFrame {
 		btnOk.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// 주문할 음식 계산.
-				String sql = "SELECT sum(price), menu FROM orderList WHERE userid = ?";
+				String sql = "SELECT price, menu FROM orderList WHERE userid = ?";
+				ArrayList<String> price = new ArrayList<>();
+				ArrayList<String> menu = new ArrayList<>();
 				
 				try {
 					PreparedStatement pstmt = DBUtil.dbconn.prepareStatement(sql);
@@ -387,10 +388,20 @@ public class DeliveryInfo extends JFrame {
 					ResultSet rs = pstmt.executeQuery();
 					
 					while(rs.next()) {
-						txtAllPrice.setText(rs.getString(1));
-						textArea.append(rs.getString(2) + "\n");
+//						txtAllPrice.setText(rs.getString(1));
+						price.add(rs.getString(1));
+						menu.add(rs.getString(2));
 					}
 					
+					int sum = 0;
+					for(String all : price) {
+						sum += Integer.parseInt(all);
+					}
+					txtAllPrice.setText(Integer.toString(sum));
+					
+					for(String allMenu : menu) {
+						textArea.append(allMenu +"\n");
+					}
 					pstmt.close();
 				} catch (SQLException e1) {
 					e1.printStackTrace();
@@ -411,7 +422,8 @@ public class DeliveryInfo extends JFrame {
 		txtAllPrice.setColumns(10);
 		
 		textArea = new JTextArea();
-		textArea.setText("   ");
+		textArea.setDisabledTextColor(Color.BLACK);
+		textArea.setCaretColor(Color.BLACK);
 		textArea.setBackground(SystemColor.controlHighlight);
 		textArea.setEnabled(false);
 		textArea.setBounds(9, 123, 198, 70);
