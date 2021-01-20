@@ -51,7 +51,6 @@ public class DeliveryInfo extends JFrame {
 	DefaultTableModel orderListModel;
 	JComboBox cmbKind = new JComboBox();
 	private JTextArea textArea;
-	
 	private int kindCriteria = 99;
 	private String srchKind = null;
 
@@ -388,9 +387,8 @@ public class DeliveryInfo extends JFrame {
 					ResultSet rs = pstmt.executeQuery();
 					
 					while(rs.next()) {
-						txtAllPrice.setText(rs.getString(1)); 
+						txtAllPrice.setText(rs.getString(1));
 						textArea.append(rs.getString(2) + "\n");
-						
 					}
 					
 					pstmt.close();
@@ -411,11 +409,12 @@ public class DeliveryInfo extends JFrame {
 		txtAllPrice.setBounds(10, 42, 198, 21);
 		panel_2.add(txtAllPrice);
 		txtAllPrice.setColumns(10);
-
-		JTextArea textArea = new JTextArea();
-		textArea.setEditable(false);
+		
+		textArea = new JTextArea();
+		textArea.setText("   ");
 		textArea.setBackground(SystemColor.controlHighlight);
-		textArea.setBounds(9, 119, 198, 74);
+		textArea.setEnabled(false);
+		textArea.setBounds(9, 123, 198, 70);
 		panel_2.add(textArea);
 
 		JScrollPane scrollPane = new JScrollPane();
@@ -582,5 +581,4 @@ public class DeliveryInfo extends JFrame {
 		}
 
 	} // end of setTxtField
-
 }// end of class
