@@ -96,9 +96,9 @@ public class SampleTest {
 
 }
     
-10. 프로젝트 속성의 Java Build Path 에 ojdbc8.jar 를 추가 -- oracle 전용
+10. 프로젝트 속성의 Java Build Path에 Libraries 탭의 Classpath에 ojdbc8.jar 를 추가 -- oracle 전용
 
-11. Deployment Assembly 에 ojdbc8.jar 추가 -- oracle 전용
+11. 프로젝트 속성의 Deployment Assembly 에 add후 java Build Path Entries 들어가서 ojdbc8.jar 추가 -- oracle 전용
 
 11-1 lombok 뒤에 추가. -- mysql 전용
 	<!-- mysql jdbc -->
@@ -111,17 +111,18 @@ public class SampleTest {
 
 <!-- oracle -->
 @Log4j
+@Log4j
 public class JDBCTest {
 	
 	//@Test
 	public void testConn() {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
-			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.25:1521:orcl",
-					"st3",
+			Connection conn = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:orcl",
+					"java",
 					"1234");
 			log.info(conn);
-		} catch (Exception e) {
+		}catch (Exception e) {
 			System.out.println(e.toString());
 		}
 	}
@@ -144,8 +145,7 @@ public class JDBCTest {
 		}
 	}
 }
-13. HikariCP 추가 -- oracle 전용
-
+13. HikariCP(Connection Pool) 추가 -- oracle 전용 - db는 하나인데 접속자는 수천수만명까지 접속 가능. 
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
@@ -213,13 +213,15 @@ public class DataSourceTest {
 		</dependency>
 		
 17. root-context.xml 의  source 에 sqlSessionFactory 추가 후 Namespace jdbc와 mybatis 체크
+	<!-- 이건 mysql -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="com.mysql.cj.jdbc.Driver"></property>
 		<property name="url" value="jdbc:mysql://localhost:3306/javadb?serverTimezone=Asia/Seoul" ></property>
 		<property name="username" value="java"></property>
 		<property name="password" value="1234"></property>
 	</bean>
-
+	
+	<!-- 이건 공통 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 	</bean>
@@ -242,7 +244,7 @@ public class DataSourceTest {
 	}
 
 
-19. src/main/java 에 com.it.mapper 패키지 생성하고 TimeMapper 인터페이스 생성
+19. src/main/java 에 com.koreait.mapper 패키지 생성하고 TimeMapper 인터페이스 생성
 
 // DB와 최초로 만나는 패키지. mapper
 public interface TimeMapper { 
@@ -263,7 +265,8 @@ public interface TimeMapper {
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.koreait.mapper.TimeMapper">
 	<select id="getTime" resultType="string">
-		select sysdate <!-- ; 세미콜론 찍으면 안된다. -->
+		select sysdate <!-- ; 세미콜론 찍으면 안된다.  mysql-->
+		select sysdate form dual <!-- oracle from dual 문법임. -->
 	</select>
 </mapper>
 
@@ -277,13 +280,13 @@ public class TimeMapperTest {
 	private TimeMapper timeMapper;
 	
 	//@Test
-	public void testGetTiem() {
+	public void testGetTime() {
 		log.info("timemapper : " + timeMapper.getTime());
 		log.info("................................");
 	}
 
 }
-
+<!-- 22 -붙은건 다 mysql. oracle은 23번으로가기.-->
 22-2 DB만들기 및 값 넣기
 
 CREATE TABLE tblboard (
@@ -449,12 +452,12 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 25. root-context.xml 파일 일부 수정
 
 	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-		<!-- 
+			<!--  
 		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
-		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.25:1521:orcl"></property>
-		 -->
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:orcl"></property>
+		-->
 		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"></property>
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@192.168.0.25:1521:orcl"></property>
+		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:orcl"></property>
 		<property name="username" value="st3"></property>
 		<property name="password" value="1234"></property>
 	</bean>
@@ -467,7 +470,7 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 <!DOCTYPE log4j:configuration SYSTEM "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd">
 
 
-27. pom 의 서블릿 버전 수정
+27. pom 의 서블릿 버전 수정 (일부 내용이 변경됨)
 
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -490,11 +493,11 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 			<version>1.3.3</version>
 		</dependency>
 
-30. src/main/java 에 com.it.service 패키지 추가
+30. src/main/java 에 com.koreait.service 패키지 추가
 
 31. root-context.xml 의 네임스페이스에 context 항목 체크 하고 다음 내용 추가
 
-<context:component-scan base-package="com.it.service" />
+<context:component-scan base-package="com.koreait.service" />
 
 32. 데이터베이스에 입력시 한글 깨짐 방지 위해 web.xml 수정
 
@@ -525,7 +528,7 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 			<version>2.8.2</version>
 		</dependency>
 
-34. pom 의 AOP 버전 수정
+34. pom 의 AOP 버전 수정( 기존내용 수정)
 
 	<properties>
 		<java-version>1.11</java-version>
@@ -575,8 +578,8 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 		</dependency>
 
 38.  src/main/webapp/WEB-INF/spring 폴더에 Spring Bean Configuration File 생성
-	파일명을 security-context.xml 로 생성
-	namespace 에서 security 항목 체크하고 spring-security.xsd 체크 
+	파일명을 security-context.xml 로 생성(next버튼)
+	namespace 에서 security 항목 체크하고 spring-security.xsd 체크 (버전없는거)
 
 39. web.xml 에 다음의 내용을 추가
 
@@ -613,6 +616,131 @@ log4jdbc.spylogdelegator.name=net.sf.log4jdbc.log.slf4j.Slf4jSpyLogDelegator
 			<security:password-encoder ref="bcryptPasswordEncoder" />
 		</security:authentication-provider>
 	</security:authentication-manager>
+
+-------------------------------- 스프링 설정 끝-------------------------
+1. oracle 가서 테이블만들기.
+/* sequence 생성 숫자 자동증가. */
+create sequence seq_b_num;
+
+ /* sequence 제거 */
+drop sequence seq_b_num;
+
+/* 게시판 테이블 생성 */
+create table tbl_board(
+    b_num int not null,
+    b_subject varchar(100) not null,
+    b_contents varchar(2000) not null,
+    b_name varchar(100) not null,
+    b_passwd varchar(100) not null,
+    b_wdate date default sysdate not null, /* 작성일 */
+    b_udate date default sysdate not null, /* 수정일 */ 
+    constraint pk_b_num primary key (b_num) /* 주키 설정 */       
+);
+
+drop table tbl_board;
+
+2. src/main/java com.koreait.domain 만든 후 BoardVO생성.
+
+@Data // get과 set을 안만들어도 @Data가 해결해줌
+public class BoardVO {
+	
+	private int b_num;
+	private String b_subject;
+	private String b_contents;
+	private String b_name;
+	private String b_passwd;
+	private Date b_wdate;
+	private Date b_udate;
+	
+}
+
+insert into tbl_board(b_num, b_subject, b_contents, b_name, b_passwd)
+    values (seq_b_num.nextval, '스프링 프레임워크', '프레임워크 내용', '홍길동', '1234');
+    
+commit;
+
+3. src/main/resources com -> koreait -> mapper에 BoardMapper.xml 생성
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.koreait.mapper.BoardMapper">
+	<select id="getList" resultType="com.koreait.domain.BoardVO">
+		select * from tbl_board	order by b_num desc 
+	</select>
+</mapper>
+
+4. src/test/java에 com.koreait.mapper 패키지 생성후 BoardmapperTest 클래스 생성
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class BoardMapperTest {
+	
+	@Setter(onMethod_=@Autowired) // 아래쪽 매퍼가 만들어진다는 뜻.
+	private BoardMapper mapper;
+	
+	@Test
+	public void testgetList() {
+		log.info("리스트......................");
+		mapper.getList().forEach(board -> log.info(board)); // 람다식 구성할 때 board는 변수이름처럼 지어주는것.
+	}
+}
+
+5. com.koreait.service에 BoardService 인터페이스 생성.
+public interface BoardService {
+
+	public List<BoardVO> getList();
+}
+
+6. BoardServiceImpl 클래스 생성.
+@Log4j
+@Service
+public class BoardServiceImpl implements BoardService{
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardMapper mapper;
+
+	@Override
+	public List<BoardVO> getList() {
+	
+	return mapper.getList();
+}
+
+}
+
+7. src/test/java com.koreait.service 생성 후 BoardServiceTest 클래스 생성
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+@Log4j
+public class BoardServiceTest {
+	
+	@Setter(onMethod_=@Autowired)
+	private BoardService service;
+	
+	//@Test
+	public void testGetList() {
+		log.info("list....................................");
+		service.getList().forEach(board -> log.info(board)); // 람다식 반복구문
+	}
+}
+8. BoardController 에추가.
+
+	@Setter(onMethod_=@Autowired) // 객체를 생성하는 것.
+	private BoardService service;
+	
+	@GetMapping("/list") // url 뒤에 get방식으로 받아오는것.
+	public String list(Model model) { // DB 출력하는 것을 그대로 넘겨주는 Model 
+		
+		model.addAttribute("list", service.getList()); // 이런 이름(여기선 list)으로 service.getList()에서 온 값을 넘기겠다.
+													   // 테이블의 내용을 list 변수로 jsp 파일에 전달.
+		
+		return "/board/list";
+9. views/board 파일에 list.jsp 생성.
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+추가 후
+table 부분 변경
+10.
 
 37. pom.xml
 
