@@ -34,7 +34,8 @@ public class Lesson202Application {
 	@Bean
 	public CommandLineRunner commandLineRunner(ApplicationContext ctx) {
 		return args->{
-			System.out.println("Let's inspect the beans provided by Spring boot"); // Spring Boot에 의해 제공되는 Beans를 살펴보자.
+			// Spring Boot에 의해 제공되는 Beans를 살펴보자.
+			System.out.println("Let's inspect the beans provided by Spring boot"); 
 			String[] beanNames = ctx.getBeanDefinitionNames();
 			Arrays.sort(beanNames);
 			
