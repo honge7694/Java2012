@@ -1,14 +1,13 @@
-package com.honge7694.Test201;
+package com.swcodingschool.Lesson240;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PracticeApplication {
+public class AccessMysqlApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(PracticeApplication.class, args);
+		SpringApplication.run(AccessMysqlApplication.class, args);
 	}
-	
-	
+
 }

@@ -1,10 +1,10 @@
-package com.honge7694.Test201;
+package com.swcodingschool.Lesson220;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PracticeApplicationTests {
+class RestfulWebServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
