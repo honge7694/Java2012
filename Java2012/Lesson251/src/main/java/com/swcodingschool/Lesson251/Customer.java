@@ -1,17 +1,27 @@
 package com.swcodingschool.Lesson251;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "tbl_customer")
 public class Customer {// == Lesson242 User
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+    @Column(name = "id", updatable = false, nullable = false)
 	private Long id;
+	
+	@Column(name = "firstName", nullable = false)
 	private String firstName;
+	
+	@Column(name = "lastName", nullable = false)
 	private String lastName;
+	
 	protected Customer() { 
 		
 	}
