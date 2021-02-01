@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- This guide walks you through the process of creating a Spring application 
+	connected to a MySQL Database (as opposed to an in-memory, embedded database, 
+	which most of the other guides and many sample applications use). It uses 
+	Spring Data JPA to access the database, but this is only one of many possible 
+	choices (for example, you could use plain Spring JDBC). You will create a 
+	MySQL database, build a Spring application, and connect it to the newly created 
+	database. After create the database, create a resource file application.properties. -->
 <project xmlns="http://maven.apache.org/POM/4.0.0"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
@@ -10,33 +17,34 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.swcodingschool</groupId>
-	<artifactId>Lesson220</artifactId>
+	<artifactId>Lesson242</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restfulWebService</name>
-	<description>RESTFul Web Service build demo</description>
+	<packaging>jar</packaging>
+	<name>AccessingDataMysql</name>
+	<description>Accessing data with MySQL</description>
 	<properties>
-		<java.version>1.8</java.version>
+		<java.version>8</java.version>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
 		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<scope>runtime</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<!-- Step 1. pom.xml 수정 -->
-			<!-- junit test 목적으로 제외 정의, 여기부터 -->
-			<exclusions>
-				<exclusion>
-					<groupId>org.junit.vintage</groupId>
-					<artifactId>junit-vintage-engine</artifactId>
-				</exclusion>
-			</exclusions>
-			<!-- junit test 목적으로 제외 정의, 여기까지 -->
-			<!-- step 2.작업을 위해 greeting class 생성하러 가자. -->
 		</dependency>
 	</dependencies>
 

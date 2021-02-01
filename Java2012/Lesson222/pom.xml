@@ -10,10 +10,10 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.swcodingschool</groupId>
-	<artifactId>Lesson220</artifactId>
+	<artifactId>Lesson222</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>restfulWebService</name>
-	<description>RESTFul Web Service build demo</description>
+	<name>Lesson222</name>
+	<description>Consuming RESTFul Web Service demo</description>
 	<properties>
 		<java.version>1.8</java.version>
 	</properties>
@@ -27,16 +27,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
-			<!-- Step 1. pom.xml 수정 -->
-			<!-- junit test 목적으로 제외 정의, 여기부터 -->
+			<!-- Step 1. Modifiy pom.xml, from here-->
 			<exclusions>
 				<exclusion>
 					<groupId>org.junit.vintage</groupId>
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
-			<!-- junit test 목적으로 제외 정의, 여기까지 -->
-			<!-- step 2.작업을 위해 greeting class 생성하러 가자. -->
+			<!-- Step 1. Modifiy pom.xml, until here -->
 		</dependency>
 	</dependencies>
 

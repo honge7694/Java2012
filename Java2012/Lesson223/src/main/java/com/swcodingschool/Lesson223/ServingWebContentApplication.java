@@ -1,13 +1,13 @@
-package com.swcodingschool.Lesson240;
+package com.swcodingschool.Lesson223;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AccessMysqlApplication {
+public class ServingWebContentApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AccessMysqlApplication.class, args);
+		SpringApplication.run(ServingWebContentApplication.class, args);
 	}
 
 }

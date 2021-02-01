@@ -9,7 +9,7 @@ public class Greeting {
 	public Greeting(long id, String content) {
 		this.id = id;
 		this.content = content;
-	} // end constructor
+	}// end constructor
 
 	public long getId() {
 		return id;
@@ -18,10 +18,10 @@ public class Greeting {
 	public String getContent() {
 		return content;
 	}
+
 	/*
-	 * Next : Step 3. Resource Controller 생성 및 이동.
+	 * next : Step 3. create resource controller 
 	 * GreetingController.java
 	 */
-} // end of Greeting
-
+}//end of class
 
