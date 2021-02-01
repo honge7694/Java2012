@@ -1,4 +1,4 @@
-package com.swcodingschool.Lesson250;
+package com.swcodingschool.Lesson251;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,3 +52,4 @@ public class Customer {// == Lesson242 User
 	
 	
 }
+
