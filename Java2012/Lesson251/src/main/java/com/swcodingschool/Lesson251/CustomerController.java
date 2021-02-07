@@ -11,13 +11,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller
-@RequestMapping(value ="/customer/*")
+@RequestMapping(value ="/")
 public class CustomerController {
 
 	@Autowired
 	private CustomerRepository customerRepository;
 
-	@GetMapping(value = "/list")
+	@GetMapping(value = "/")
 	@ResponseBody
 	public List<Customer> list(Customer customer){
 		customerRepository.save(customer);
