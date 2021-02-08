@@ -14,7 +14,7 @@ public class CarFactory {
 	}
 	
 	public void showInfo() {
-		System.out.println("공장 이름 : " + factoryName + "자동차 생산 갯수 : " + productCounts);
+		System.out.println("공장 이름 : " + factoryName + " 자동차 생산 갯수 : " + productCounts);
 	}
 	
 }

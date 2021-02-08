@@ -7,7 +7,6 @@ public class CarCompanyFactory {
 		
 		CarFactory cheongju = new CarFactory("청주", 500);
 		cheongju.showInfo();
-		
 		cheongju.makeCar(hyundai);
 		hyundai.showInfo();
 		

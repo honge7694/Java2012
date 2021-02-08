@@ -3,7 +3,6 @@ package com.swcodingschool.oop;
 public class CarCompany {
 	public static int carCompanyProduct;
 	
-	
 	private static CarCompany instance = new CarCompany();
 	
 	private CarCompany(){
