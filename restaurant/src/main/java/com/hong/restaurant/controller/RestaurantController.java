@@ -24,8 +24,14 @@ public class RestaurantController {
     }
 
     @GetMapping("/register")
-    public String insert(){
+    public String register(){
 
         return "/restaurant/register";
+    }
+
+    @GetMapping("/register1")
+    public String register1(){
+
+        return "/restaurant/register1";
     }
 }
