@@ -20,14 +20,14 @@ import java.util.stream.IntStream;
 public class SampleController {
 
     @GetMapping("/ex1")
-    public void ex1(){
+    public void ex1() {
         log.info("ex1............");
     }
 
     @GetMapping({"/ex2", "exLink"})
-    public void exModel(Model model){
+    public void exModel(Model model) {
 
-        List<SampleDTO> list = IntStream.rangeClosed(1, 20).asLongStream().mapToObj(i-> {
+        List<SampleDTO> list = IntStream.rangeClosed(1, 20).asLongStream().mapToObj(i -> {
             SampleDTO dto = SampleDTO.builder()
                     .sno(i)
                     .first("First.. " + i)
@@ -41,7 +41,7 @@ public class SampleController {
     }
 
     @GetMapping({"/exInline"})
-    public String exInline(RedirectAttributes redirectAttributes){
+    public String exInline(RedirectAttributes redirectAttributes) {
 
         log.info("exInline.....................");
 
@@ -58,12 +58,12 @@ public class SampleController {
     }
 
     @GetMapping("/ex3")
-    public void ex3(){
+    public void ex3() {
         log.info("ex3");
     }
 
     @GetMapping({"/exLayout1", "/exLayout2", "/exTemplate", "/exSidebar"})
-    public void exLayout1(){
+    public void exLayout1() {
         log.info("exLayout........................");
 
     }

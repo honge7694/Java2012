@@ -4,7 +4,7 @@
     <th:block th:fragment="content">
 
         <h1 class="mt-4">GuestBook List Page
-        <span>
+            <span>
             <a th:href="@{/guestbook/register}">
                 <button type="button" class="btn btn-outline-primary">REGISTER</button>
             </a>
@@ -82,7 +82,7 @@
             var msg = [[${msg}]];
             console.log(msg);
 
-            if(msg){
+            if (msg) {
                 $(".modal").modal();
             }
 

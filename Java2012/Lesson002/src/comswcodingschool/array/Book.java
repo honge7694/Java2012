@@ -4,33 +4,34 @@ package comswcodingschool.array;
  * Reference type의 배열 이해
  */
 public class Book {
-	private String bookName;
-	private String author;
-	
-	public Book(){}
-	
-	public Book(String bookName, String author){
-			this.bookName = bookName;
-			this.author = author;
-	}
+    private String bookName;
+    private String author;
 
-	public String getBookName() {
-		return bookName;
-	}
+    public Book() {
+    }
 
-	public void setBookName(String bookName) {
-		this.bookName = bookName;
-	}
+    public Book(String bookName, String author) {
+        this.bookName = bookName;
+        this.author = author;
+    }
 
-	public String getAuthor() {
-		return author;
-	}
+    public String getBookName() {
+        return bookName;
+    }
 
-	public void setAuthor(String author) {
-		this.author = author;
-	}
-	
-	public void showBookInfo() {
-		System.out.println(bookName + ", " + author);
-	}
+    public void setBookName(String bookName) {
+        this.bookName = bookName;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public void showBookInfo() {
+        System.out.println(bookName + ", " + author);
+    }
 }

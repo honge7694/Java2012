@@ -12,23 +12,23 @@ import org.springframework.web.client.RestTemplate;
 @SpringBootApplication
 public class Lesson222Application {
 
-	private static final Logger log = LoggerFactory.getLogger(Lesson222Application.class);
+    private static final Logger log = LoggerFactory.getLogger(Lesson222Application.class);
 
-	public static void main(String[] args) {
-		SpringApplication.run(Lesson222Application.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(Lesson222Application.class, args);
+    }
 
-	@Bean
-	public RestTemplate restTemplate(RestTemplateBuilder builder) {
-		return builder.build();
-	}
+    @Bean
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    }
 
-	@Bean
-	public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
-		return args -> {
-			Quote quote = restTemplate.getForObject(
-					"http:// 192.168.0.21:8080/random", Quote.class);
-			log.info(quote.toString());
-		};
-	}
+    @Bean
+    public CommandLineRunner run(RestTemplate restTemplate) throws Exception {
+        return args -> {
+            Quote quote = restTemplate.getForObject(
+                    "http:// 192.168.0.21:8080/random", Quote.class);
+            log.info(quote.toString());
+        };
+    }
 }

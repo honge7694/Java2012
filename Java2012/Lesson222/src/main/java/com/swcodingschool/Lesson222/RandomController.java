@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RandomController {
 
-	
-	@GetMapping("/random")
-	public Random greeting() {
-		return new Random();
-	}
+
+    @GetMapping("/random")
+    public Random greeting() {
+        return new Random();
+    }
 
 }

@@ -22,29 +22,29 @@ import java.util.Scanner;
  */
 public class Scoring {
 
-	public static void main(String[] args) {
-		
-		Scanner sc = new Scanner(System.in);
-		
-		double[][] score = new double[3][5];
-		
-		for(int i = 0; i < score.length; i++) {
-			for(int j = 0; j < score[i].length-2; j++) {
-				score[i][j] = sc.nextDouble();
-				score[i][3] += score[i][j];
-			}
-			score[i][4] = score[i][3]/3;
-		} // end of for
-		
-		System.out.println("국어" + "\t" + "수학" + "\t" + "영어" + "\t" + "총점" + "\t" + "평균");
-		
-		for(int i = 0; i < score.length; i++) {
-			for(int j = 0; j < score[i].length; j++) {
-				System.out.print(score[i][j] + "\t");
-			}
-			System.out.println(" ");
-		} // end of for
-		
-	} // end of main
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+
+        double[][] score = new double[3][5];
+
+        for (int i = 0; i < score.length; i++) {
+            for (int j = 0; j < score[i].length - 2; j++) {
+                score[i][j] = sc.nextDouble();
+                score[i][3] += score[i][j];
+            }
+            score[i][4] = score[i][3] / 3;
+        } // end of for
+
+        System.out.println("국어" + "\t" + "수학" + "\t" + "영어" + "\t" + "총점" + "\t" + "평균");
+
+        for (int i = 0; i < score.length; i++) {
+            for (int j = 0; j < score[i].length; j++) {
+                System.out.print(score[i][j] + "\t");
+            }
+            System.out.println(" ");
+        } // end of for
+
+    } // end of main
 
 } // end of class

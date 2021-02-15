@@ -22,9 +22,9 @@ public class GuestbookRepositoryTests {
     private GuestbookRepository guestbookRepository;
 
     //@Test
-    public void insertDummies(){
+    public void insertDummies() {
 
-        IntStream.rangeClosed(1,300).forEach(i ->{
+        IntStream.rangeClosed(1, 300).forEach(i -> {
 
             Guestbook guestbook = Guestbook.builder()
                     .title("Title...." + i)
@@ -36,11 +36,11 @@ public class GuestbookRepositoryTests {
     }
 
     //@Test
-    public void updateTest(){
+    public void updateTest() {
 
         Optional<Guestbook> result = guestbookRepository.findById(300L);
 
-        if(result.isPresent()){
+        if (result.isPresent()) {
 
             Guestbook guestbook = result.get();
 
@@ -52,7 +52,7 @@ public class GuestbookRepositoryTests {
     }
 
     @Test
-    public void testQuery1(){
+    public void testQuery1() {
 
         Pageable pageable = PageRequest.of(0, 10, Sort.by("gno").descending());
 

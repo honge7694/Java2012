@@ -6,39 +6,39 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Item {
-  private static final String temp[]= {"Hello", "Hong Gilddong","Park Munsu"};
-  private final AtomicLong counter = new AtomicLong();
-  
-  private Long id;
-  private String quote;
+    private static final String temp[] = {"Hello", "Hong Gilddong", "Park Munsu"};
+    private final AtomicLong counter = new AtomicLong();
 
-  public Item() {
-	  int i = (int)(Math.random()*2);
-	  this.id = counter.incrementAndGet();
-	  this.quote = temp[i];
-  }
+    private Long id;
+    private String quote;
 
-  public Long getId() {
-    return this.id;
-  }
+    public Item() {
+        int i = (int) (Math.random() * 2);
+        this.id = counter.incrementAndGet();
+        this.quote = temp[i];
+    }
 
-  public String getQuote() {
-    return this.quote;
-  }
+    public Long getId() {
+        return this.id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public String getQuote() {
+        return this.quote;
+    }
 
-  public void setQuote(String quote) {
-    this.quote = quote;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  @Override
-  public String toString() {
-    return "Item{" +
-        "id=" + id +
-        ", quote='" + quote + '\'' +
-        '}';
-  }
+    public void setQuote(String quote) {
+        this.quote = quote;
+    }
+
+    @Override
+    public String toString() {
+        return "Item{" +
+                "id=" + id +
+                ", quote='" + quote + '\'' +
+                '}';
+    }
 }

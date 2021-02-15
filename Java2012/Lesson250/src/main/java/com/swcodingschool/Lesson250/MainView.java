@@ -13,57 +13,56 @@ import com.vaadin.flow.router.Route;
 
 @Route
 public class MainView extends VerticalLayout {
-	
-	private final CustomerRepository repo;
 
-	private final CustomerEditor editor;
+    private final CustomerRepository repo;
 
-	final Grid<Customer> grid;
+    private final CustomerEditor editor;
 
-	final TextField filter;
+    final Grid<Customer> grid;
 
-	private final Button addNewBtn;
+    final TextField filter;
 
-	public MainView(CustomerRepository repo, CustomerEditor editor) {
-		this.repo = repo;
-		this.editor = editor;
-		this.grid = new Grid<>(Customer.class);
-		this.filter = new TextField();
-		this.addNewBtn = new Button("New customer", VaadinIcon.PLUS.create());
+    private final Button addNewBtn;
 
-		HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn);
-		add(actions, grid, editor);
+    public MainView(CustomerRepository repo, CustomerEditor editor) {
+        this.repo = repo;
+        this.editor = editor;
+        this.grid = new Grid<>(Customer.class);
+        this.filter = new TextField();
+        this.addNewBtn = new Button("New customer", VaadinIcon.PLUS.create());
 
-		grid.setHeight("300px");
-		grid.setColumns("id", "firstName", "lastName");
-		grid.getColumnByKey("id").setWidth("50px").setFlexGrow(0);
+        HorizontalLayout actions = new HorizontalLayout(filter, addNewBtn);
+        add(actions, grid, editor);
 
-		filter.setPlaceholder("Filter by last name");
+        grid.setHeight("300px");
+        grid.setColumns("id", "firstName", "lastName");
+        grid.getColumnByKey("id").setWidth("50px").setFlexGrow(0);
 
-		filter.setValueChangeMode(ValueChangeMode.EAGER);
-		filter.addValueChangeListener(e -> listCustomers(e.getValue()));
+        filter.setPlaceholder("Filter by last name");
 
-		grid.asSingleSelect().addValueChangeListener(e -> {
-			editor.editCustomer(e.getValue());
-		});
+        filter.setValueChangeMode(ValueChangeMode.EAGER);
+        filter.addValueChangeListener(e -> listCustomers(e.getValue()));
 
-		addNewBtn.addClickListener(e -> editor.editCustomer(new Customer("", "")));
+        grid.asSingleSelect().addValueChangeListener(e -> {
+            editor.editCustomer(e.getValue());
+        });
 
-		editor.setChangeHandler(() -> {
-			editor.setVisible(false);
-			listCustomers(filter.getValue());
-		});
+        addNewBtn.addClickListener(e -> editor.editCustomer(new Customer("", "")));
 
-		listCustomers(null);
-	}
+        editor.setChangeHandler(() -> {
+            editor.setVisible(false);
+            listCustomers(filter.getValue());
+        });
 
-	void listCustomers(String filterText) {
-		if (StringUtils.isEmpty(filterText)) {
-			grid.setItems(repo.findAll());
-		}
-		else {
-			grid.setItems(repo.findByLastNameStartsWithIgnoreCase(filterText));
-		}
-	}
+        listCustomers(null);
+    }
+
+    void listCustomers(String filterText) {
+        if (StringUtils.isEmpty(filterText)) {
+            grid.setItems(repo.findAll());
+        } else {
+            grid.setItems(repo.findByLastNameStartsWithIgnoreCase(filterText));
+        }
+    }
 
 }

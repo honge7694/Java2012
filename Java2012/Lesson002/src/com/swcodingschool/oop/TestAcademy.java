@@ -8,33 +8,35 @@ package com.swcodingschool.oop;
  */
 
 public class TestAcademy {
-	public int academyMoney;
-	public int academyCount;
-	
-	// 생성자
-	private TestAcademy() {}
-	// 인스턴스
-	private static TestAcademy instance = new TestAcademy();
-	
-	// 싱글톤 메서드
-	public static TestAcademy getInstance() {
-		if(instance == null) {
-			instance = new TestAcademy();
-		}
-		return instance;
-	}
-	
-	public void getStudent(int academyMoney) {
-		academyCount++;
-		this.academyMoney +=academyMoney;  
-	}
-	
-	public void outStudent() {
-		academyCount--;
-	}
-	
-	public void showinfo() {
-		System.out.println("학원 돈 : " + academyMoney);
-		System.out.println("학원 사람 수: " + academyCount);
-	}
+    public int academyMoney;
+    public int academyCount;
+
+    // 생성자
+    private TestAcademy() {
+    }
+
+    // 인스턴스
+    private static TestAcademy instance = new TestAcademy();
+
+    // 싱글톤 메서드
+    public static TestAcademy getInstance() {
+        if (instance == null) {
+            instance = new TestAcademy();
+        }
+        return instance;
+    }
+
+    public void getStudent(int academyMoney) {
+        academyCount++;
+        this.academyMoney += academyMoney;
+    }
+
+    public void outStudent() {
+        academyCount--;
+    }
+
+    public void showinfo() {
+        System.out.println("학원 돈 : " + academyMoney);
+        System.out.println("학원 사람 수: " + academyCount);
+    }
 }

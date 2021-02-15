@@ -33,7 +33,7 @@ public class PageResultDTO<DTO, EN> {
     // 페이지 번호 목록
     private List<Integer> pageList;
 
-    public PageResultDTO(Page<EN> result, Function<EN, DTO> fn){
+    public PageResultDTO(Page<EN> result, Function<EN, DTO> fn) {
 
         dtoList = result.stream().map(fn).collect(Collectors.toList());
 
@@ -48,7 +48,7 @@ public class PageResultDTO<DTO, EN> {
         this.size = pageable.getPageSize();
 
         // temp and page
-        int tempEnd = (int)(Math.ceil(page/10.0)) * 10;
+        int tempEnd = (int) (Math.ceil(page / 10.0)) * 10;
 
         start = tempEnd - 9;
 

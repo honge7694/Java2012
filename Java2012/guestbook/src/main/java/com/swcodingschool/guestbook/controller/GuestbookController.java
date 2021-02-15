@@ -21,12 +21,12 @@ public class GuestbookController {
     private final GuestbookService service;
 
     @GetMapping("/")
-    public String index(){
+    public String index() {
         return "redirect:/guestbook/list";
     }
 
     @GetMapping("/list")
-    public String list(PageRequestDTO pageRequestDTO, Model model){
+    public String list(PageRequestDTO pageRequestDTO, Model model) {
 
         log.info("list..............." + pageRequestDTO);
 
@@ -37,12 +37,12 @@ public class GuestbookController {
 
     // 게시글 등록을 위한 추가 처리
     @GetMapping("/register")
-    public void register(){
+    public void register() {
         log.info("register get...");
     }
 
     @PostMapping("/register")
-    public String registerPost(GuestbookDTO dto, RedirectAttributes redirectAttributes){
+    public String registerPost(GuestbookDTO dto, RedirectAttributes redirectAttributes) {
 
         log.info("dto..." + dto);
 

@@ -7,37 +7,37 @@ import java.util.concurrent.atomic.AtomicLong;
  */
 public class Random {
 
-	  private String type;
-	  private Item item;
-	  
-	  public Random() {
-		  this.type = "success";
-		  this.item = new Item();
-	  }
+    private String type;
+    private Item item;
 
-	  public String getType() {
-	    return type;
-	  }
+    public Random() {
+        this.type = "success";
+        this.item = new Item();
+    }
 
-	  public void setType(String type) {
-	    this.type = type;
-	  }
+    public String getType() {
+        return type;
+    }
 
-	  public Item getValue() {
-	    return item;
-	  }
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	  public void setValue(Item item) {
-	    this.item = item;
-	  }
+    public Item getValue() {
+        return item;
+    }
 
-	  @Override
-	  public String toString() {
-	    return "Random{" +
-	        "type='" + type + '\'' +
-	        ", item =" + item +
-	        '}';
-	  }
-	 
+    public void setValue(Item item) {
+        this.item = item;
+    }
+
+    @Override
+    public String toString() {
+        return "Random{" +
+                "type='" + type + '\'' +
+                ", item =" + item +
+                '}';
+    }
+
 }//end of class
 

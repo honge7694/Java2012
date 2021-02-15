@@ -2,8 +2,8 @@
 <html xmlns:="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="UTF-8">
-<title>Hello World!</title>
+    <meta charset="UTF-8">
+    <title>Hello World!</title>
 </head>
 <body>
 <!-- 처음 시큐어처리 없이 보여주는 내용. 
@@ -13,7 +13,7 @@
 시큐어 처리 후 보여줄 것으로 변경된 내용. -->
 <h1 th:inline="text">Hello [[${#httpServletRequest.remoteUser}]]!</h1>
 <form th:action="@{/logout}" method="post">
-	<input type="submit" value="Sign Out"/>
+    <input type="submit" value="Sign Out"/>
 </form>
 <!-- 여기까지 시큐어 처리 후 보여줄 것으로 변경된 내용 -->
 </body>

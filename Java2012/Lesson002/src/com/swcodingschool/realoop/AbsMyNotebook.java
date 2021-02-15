@@ -2,11 +2,10 @@ package com.swcodingschool.realoop;
 
 public class AbsMyNotebook extends AbsNotebook {
 
-	@Override
-	public void typing() {
-		System.out.println("MyNotebook typing()...");
-	}
-
+    @Override
+    public void typing() {
+        System.out.println("MyNotebook typing()...");
+    }
 
 
 }

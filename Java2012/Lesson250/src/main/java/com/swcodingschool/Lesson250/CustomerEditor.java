@@ -17,83 +17,82 @@ import com.vaadin.flow.spring.annotation.UIScope;
 @UIScope
 public class CustomerEditor extends VerticalLayout implements KeyNotifier {
 
-	private final CustomerRepository repository;
-	
-	private Customer customer;
-	
-	TextField firstName = new TextField("Fisrt name");
-	TextField lastName = new TextField("List name");
-	
-	Button save = new Button("Save", VaadinIcon.CHECK.create());
-	Button cancel = new Button("Cancel");
-	Button delete = new Button("Delete", VaadinIcon.TRASH.create());
-	
-	HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
-	
-	Binder<Customer> binder = new Binder<>(Customer.class);
-	private ChangeHandler changeHandler;
+    private final CustomerRepository repository;
 
-	@Autowired
-	public CustomerEditor(CustomerRepository repository) {
-		this.repository = repository;
+    private Customer customer;
 
-		add(firstName, lastName, actions);
+    TextField firstName = new TextField("Fisrt name");
+    TextField lastName = new TextField("List name");
 
-		// bind using naming convention
-		binder.bindInstanceFields(this);
+    Button save = new Button("Save", VaadinIcon.CHECK.create());
+    Button cancel = new Button("Cancel");
+    Button delete = new Button("Delete", VaadinIcon.TRASH.create());
 
-		// Configure and style components
-		setSpacing(true);
+    HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
-		save.getElement().getThemeList().add("primary");
-		delete.getElement().getThemeList().add("error");
+    Binder<Customer> binder = new Binder<>(Customer.class);
+    private ChangeHandler changeHandler;
 
-		addKeyPressListener(Key.ENTER, e -> save());
+    @Autowired
+    public CustomerEditor(CustomerRepository repository) {
+        this.repository = repository;
 
-		// wire action buttons to save, delete and reset
-		save.addClickListener(e -> save());
-		delete.addClickListener(e -> delete());
-		cancel.addClickListener(e -> editCustomer(customer));
-		setVisible(false);
-	}
+        add(firstName, lastName, actions);
 
-	void delete() {
-		repository.delete(customer);
-		changeHandler.onChange();
-	}
+        // bind using naming convention
+        binder.bindInstanceFields(this);
 
-	void save() {
-		repository.save(customer);
-		changeHandler.onChange();
-	}
+        // Configure and style components
+        setSpacing(true);
 
-	public interface ChangeHandler {
-		void onChange();
-	}
+        save.getElement().getThemeList().add("primary");
+        delete.getElement().getThemeList().add("error");
 
-	public final void editCustomer(Customer c) {
-		if (c == null) {
-			setVisible(false);
-			return;
-		}
-		final boolean persisted = c.getId() != null;
-		if (persisted) {
-			customer = repository.findById(c.getId()).get();
-		}
-		else {
-			customer = c;
-		}
-		cancel.setVisible(persisted);
+        addKeyPressListener(Key.ENTER, e -> save());
 
-		binder.setBean(customer);
+        // wire action buttons to save, delete and reset
+        save.addClickListener(e -> save());
+        delete.addClickListener(e -> delete());
+        cancel.addClickListener(e -> editCustomer(customer));
+        setVisible(false);
+    }
 
-		setVisible(true);
+    void delete() {
+        repository.delete(customer);
+        changeHandler.onChange();
+    }
 
-		firstName.focus();
-	}
+    void save() {
+        repository.save(customer);
+        changeHandler.onChange();
+    }
 
-	public void setChangeHandler(ChangeHandler h) {
-		changeHandler = h;
-	}
+    public interface ChangeHandler {
+        void onChange();
+    }
+
+    public final void editCustomer(Customer c) {
+        if (c == null) {
+            setVisible(false);
+            return;
+        }
+        final boolean persisted = c.getId() != null;
+        if (persisted) {
+            customer = repository.findById(c.getId()).get();
+        } else {
+            customer = c;
+        }
+        cancel.setVisible(persisted);
+
+        binder.setBean(customer);
+
+        setVisible(true);
+
+        firstName.focus();
+    }
+
+    public void setChangeHandler(ChangeHandler h) {
+        changeHandler = h;
+    }
 
 }

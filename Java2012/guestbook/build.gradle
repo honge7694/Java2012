@@ -40,7 +40,7 @@ test {
 
 def querydslDir = "$buildDir/generated/querydsl"
 
-querydsl{
+querydsl {
     jpa = true
     querydslSourcesDir = querydslDir
 
@@ -50,7 +50,7 @@ sourceSets {
     main.java.srcDir querydslDir
 }
 
-configurations{
+configurations {
     querydsl.extendsFrom compileClasspath
 }
 

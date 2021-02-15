@@ -11,7 +11,7 @@ public interface GuestbookService {
 
     PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO);
 
-    default  Guestbook dtoToEntity(GuestbookDTO dto){
+    default Guestbook dtoToEntity(GuestbookDTO dto) {
         Guestbook entity = Guestbook.builder()
                 .gno(dto.getGno())
                 .title(dto.getTitle())
@@ -21,7 +21,7 @@ public interface GuestbookService {
         return entity;
     }
 
-    default GuestbookDTO entityToDto(Guestbook entity){
+    default GuestbookDTO entityToDto(Guestbook entity) {
 
         GuestbookDTO dto = GuestbookDTO.builder()
                 .gno(entity.getGno())

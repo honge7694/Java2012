@@ -1,4 +1,5 @@
 package com.swcodingschool.hello;
+
 /*
  * Java Basic Input and Output
  * Java output : System.out.println(), ..print(), ..printf()
@@ -11,17 +12,17 @@ package com.swcodingschool.hello;
  */
 public class InputAndOutput {
 
-	public static void main(String[] args) {
-		//printing variables and literals
-		double number = -10.6;
-		
-		System.out.println(5);
-		System.out.println(number);
-		
-		// print concatenated strings
-		System.out.println("와우.. " + "좀 놀랍군...");
-		System.out.println("숫자 : " + number);
+    public static void main(String[] args) {
+        //printing variables and literals
+        double number = -10.6;
 
-	} //end of main
+        System.out.println(5);
+        System.out.println(number);
+
+        // print concatenated strings
+        System.out.println("와우.. " + "좀 놀랍군...");
+        System.out.println("숫자 : " + number);
+
+    } //end of main
 
 }//end of class

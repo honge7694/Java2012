@@ -18,12 +18,12 @@ import java.util.function.Function;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class GuestbookServiceImpl implements GuestbookService{
+public class GuestbookServiceImpl implements GuestbookService {
 
     private final GuestbookRepository repository;
 
     @Override
-    public Long register(GuestbookDTO dto){
+    public Long register(GuestbookDTO dto) {
 
         log.info("DTO--------------------");
         log.info(dto);
@@ -40,7 +40,7 @@ public class GuestbookServiceImpl implements GuestbookService{
     @Override
     public PageResultDTO<GuestbookDTO, Guestbook> getList(PageRequestDTO requestDTO) {
 
-        Pageable pageable = requestDTO. getPageable(Sort.by("gno").descending());
+        Pageable pageable = requestDTO.getPageable(Sort.by("gno").descending());
 
         Page<Guestbook> result = repository.findAll(pageable);
 
