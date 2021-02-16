@@ -28,7 +28,7 @@ public class RestaurantImageDTO {
         return "";
     }
 
-    public String getThumnailURL(){
+    public String getThumbnailURL(){
         try{
             return URLEncoder.encode(path+"/s_"+uuid+"_"+imgName, "UTF-8");
         } catch (UnsupportedEncodingException e) {

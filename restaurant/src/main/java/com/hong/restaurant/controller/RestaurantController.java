@@ -50,9 +50,9 @@ public class RestaurantController {
     public String uploadFile(RestaurantDTO restaurantDTO, RedirectAttributes redirectAttributes){
         log.info("restaurantDTO: " + restaurantDTO );
 
-        Long mno =restaurantService.register(restaurantDTO);
+        Long pno = restaurantService.register(restaurantDTO);
 
-        redirectAttributes.addFlashAttribute("msg", mno);
+        redirectAttributes.addFlashAttribute("msg", pno);
 
         return "redirect:/restaurant/list";
 
