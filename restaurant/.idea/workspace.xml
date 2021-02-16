@@ -6,8 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e06ff47a-78c0-4079-8706-d0c77d2a61e9" name="Default Changelist" comment="">
 <<<<<<< HEAD
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
 =======
+=======
+>>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register1.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register2.html" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register3.html" afterDir="false" />
@@ -21,6 +24,9 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/list.html" afterDir="false" />
+<<<<<<< HEAD
+>>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
+=======
 >>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -94,8 +100,11 @@
     </key>
   </component>
 <<<<<<< HEAD
+<<<<<<< HEAD
   <component name="RunManager">
 =======
+=======
+>>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
   <component name="RunManager" selected="Spring Boot.RestaurantApplication">
     <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
       <option name="arquillianRunConfiguration">
@@ -129,6 +138,9 @@
       <DebugAllEnabled>false</DebugAllEnabled>
       <method v="2" />
     </configuration>
+<<<<<<< HEAD
+>>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
+=======
 >>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
     <configuration name="RestaurantApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="restaurant.main" />
@@ -158,6 +170,9 @@
 =======
       <workItem from="1613365682359" duration="9640000" />
       <workItem from="1613386308443" duration="8749000" />
+<<<<<<< HEAD
+>>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
+=======
 >>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
     </task>
     <servers />

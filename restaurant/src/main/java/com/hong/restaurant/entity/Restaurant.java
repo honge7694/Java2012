@@ -22,13 +22,4 @@ public class Restaurant {
 
     @Column(length = 100, nullable = false)
     private String pcost;
-
-    @Column(nullable = true)
-    private String oriFileName;
-
-    @Column(nullable = true)
-    private String fileName;
-
-    @Column(nullable = true)
-    private String filePath;
 }

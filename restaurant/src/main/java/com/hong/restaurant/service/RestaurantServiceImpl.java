@@ -2,31 +2,41 @@ package com.hong.restaurant.service;
 
 import com.hong.restaurant.dto.RestaurantDTO;
 import com.hong.restaurant.entity.Restaurant;
+import com.hong.restaurant.entity.RestaurantImage;
+import com.hong.restaurant.repository.RestaurantImageRepository;
 import com.hong.restaurant.repository.RestaurantRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Map;
+
 @Service
 @Log4j2
 @RequiredArgsConstructor
 public class RestaurantServiceImpl implements RestaurantService{
 
-    private final RestaurantRepository repository;
+    private final RestaurantRepository restaurantRepository;
 
+    private final RestaurantImageRepository imageRepository;
+
+    @Transactional
     @Override
-    public Long register1(RestaurantDTO dto) {
+    public Long register(RestaurantDTO restaurantDTO) {
 
-        log.info("DTO Register -------------------");
-        log.info(dto);
+        Map<String, Object> entityMap = dtoToEntity(restaurantDTO);
+        Restaurant restaurant = (Restaurant) entityMap.get("restaurant");
+        List<RestaurantImage> restaurantImageList = (List<RestaurantImage>) entityMap.get("imgList");
 
-        Restaurant entity = dtoToEntity(dto);
+        restaurantRepository.save(restaurant);
 
-        log.info(entity);
+        restaurantImageList.forEach(restaurantImage -> {
+            imageRepository.save(restaurantImage);
+        });
 
-        repository.save(entity);
-
-        return entity.getPno();
+        return restaurant.getPno();
     }
 }

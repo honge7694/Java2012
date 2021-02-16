@@ -9,7 +9,7 @@
 
         <h1 class="mt-4">Product Register Page</h1>
 
-        <form th:action="@{/guestbook/register}" th:method="post" enctype="multipart/form-data">
+        <form th:action="@{/restaurant/register}" th:method="post" enctype="multipart/form-data">
             <div class="form-group">
                 <label>Product Name</label>
                 <input type="text" class="form-control" name="name" placeholder="Enter Title">
@@ -20,7 +20,10 @@
                 <input type="text" class="form-control" name="cost" placeholder="Enter Cost">
             </div>
 
-            <input name="uploadFiles" type="file" multiple>
+            <div class="form-group">
+                <label>Picture Upload</label>
+                <input name="uploadFiles" type="file" multiple>
+            </div>
 
             <p></p>
 
