@@ -4,30 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e06ff47a-78c0-4079-8706-d0c77d2a61e9" name="Default Changelist" comment="">
-<<<<<<< HEAD
-<<<<<<< HEAD
+    <list default="true" id="30cb1600-2a6b-4934-a57f-e2156848d41f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/modify.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/read.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-=======
-=======
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register1.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register2.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/build.gradle" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/RestaurantApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/RestaurantApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/controller/RestaurantController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/dto/RestaurantDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/dto/RestaurantDTO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/repository/RestaurantRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/repository/RestaurantRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/service/RestaurantServiceImpl.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/small-business.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/small-business.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/basic.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/layout1.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/layout1.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/list.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/list.html" afterDir="false" />
-<<<<<<< HEAD
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
-=======
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register1.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register2.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/register3.html" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,35 +36,37 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand />
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="restaurant" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
             <select />
           </tree_state>
         </projects_view>
       </state>
     </system>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Interface" />
-        <option value="Class" />
-        <option value="HTML File" />
-      </list>
-    </option>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="ProjectId" id="1oVItRjAuAIQlTPLVsVLSPPsKop" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
+  </component>
+  <component name="ProjectId" id="1oaNzS3VSbhaQUHk9ty90yeRtHR" />
+  <component name="ProjectLevelVcsManager">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
-    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
-    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
@@ -88,60 +82,14 @@
     <property name="node.js.path.for.package.tslint" value="project" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
-    <property name="project.structure.last.edited" value="Project" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.2" />
     <property name="restartRequiresConfirmation" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\github\Java2012\restaurant\src\main\resources\templates\restaurant" />
-      <recent name="C:\github\Java2012\restaurant\src\main\resources\templates\layout" />
     </key>
   </component>
-<<<<<<< HEAD
-<<<<<<< HEAD
   <component name="RunManager">
-=======
-=======
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
-  <component name="RunManager" selected="Spring Boot.RestaurantApplication">
-    <configuration default="true" type="ArquillianJUnit" factoryName="" nameIsGenerated="true">
-      <option name="arquillianRunConfiguration">
-        <value>
-          <option name="containerStateName" value="" />
-        </value>
-      </option>
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="restaurant [compileQuerydsl]" type="GradleRunConfiguration" factoryName="Gradle" temporary="true">
-      <ExternalSystemSettings>
-        <option name="executionName" />
-        <option name="externalProjectPath" value="$PROJECT_DIR$" />
-        <option name="externalSystemIdString" value="GRADLE" />
-        <option name="scriptParameters" />
-        <option name="taskDescriptions">
-          <list />
-        </option>
-        <option name="taskNames">
-          <list>
-            <option value="compileQuerydsl" />
-          </list>
-        </option>
-        <option name="vmOptions" />
-      </ExternalSystemSettings>
-      <ExternalSystemDebugServerProcess>true</ExternalSystemDebugServerProcess>
-      <ExternalSystemReattachDebugProcess>true</ExternalSystemReattachDebugProcess>
-      <DebugAllEnabled>false</DebugAllEnabled>
-      <method v="2" />
-    </configuration>
-<<<<<<< HEAD
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
-=======
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
     <configuration name="RestaurantApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot">
       <module name="restaurant.main" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.hong.restaurant.RestaurantApplication" />
@@ -149,31 +97,17 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Gradle.restaurant [compileQuerydsl]" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="e06ff47a-78c0-4079-8706-d0c77d2a61e9" name="Default Changelist" comment="" />
-      <created>1613365546950</created>
+      <changelist id="30cb1600-2a6b-4934-a57f-e2156848d41f" name="Default Changelist" comment="" />
+      <created>1613521003837</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1613365546950</updated>
-      <workItem from="1613365548066" duration="125000" />
-<<<<<<< HEAD
-      <workItem from="1613365682359" duration="9642000" />
-      <workItem from="1613433774201" duration="38000" />
-=======
-      <workItem from="1613365682359" duration="9640000" />
-      <workItem from="1613386308443" duration="8749000" />
-<<<<<<< HEAD
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
-=======
->>>>>>> dda7fcb3ade612fa0fd3f24001872608443f74f2
+      <updated>1613521003837</updated>
+      <workItem from="1613521005025" duration="198000" />
+      <workItem from="1613521231725" duration="24735000" />
     </task>
     <servers />
   </component>
@@ -190,9 +124,5 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>

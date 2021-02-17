@@ -1,5 +1,7 @@
 package com.hong.restaurant.service;
 
+import com.hong.restaurant.dto.PageRequestDTO;
+import com.hong.restaurant.dto.PageResultDTO;
 import com.hong.restaurant.dto.RestaurantDTO;
 import com.hong.restaurant.dto.RestaurantImageDTO;
 import com.hong.restaurant.entity.Restaurant;
@@ -13,6 +15,15 @@ import java.util.stream.Collectors;
 
 public interface RestaurantService {
     Long register(RestaurantDTO restaurantDTO);
+
+    PageResultDTO<RestaurantDTO, Object[]> getList(PageRequestDTO requestDTO);
+
+    RestaurantDTO getRestaurant(Long pno);
+
+    void remove(Long pno);
+
+    void modify(RestaurantDTO restaurantDTO);
+
 
     default RestaurantDTO entitiesToDTO(Restaurant restaurant, List<RestaurantImage> restaurantImages){
 
@@ -70,4 +81,6 @@ public interface RestaurantService {
        }
        return entityMap;
     }
+
+
 }

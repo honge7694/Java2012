@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<!-- Page Content -->
+<div class="container">
+    <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+        <th:block th:fragment="content">
+
+            <h1 class="mt-4">Product Read Page</h1>
+
+
+            <div class="form-group">
+                <label>Product Name</label>
+                <input type="text" class="form-control" name="pname" th:value="${dto.pname}" placeholder="Enter Title"
+                       readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Product Cost</label>
+                <input type="text" class="form-control" name="pcost" th:value="${dto.pcost}" placeholder="Enter Cost"
+                       readonly>
+            </div>
+
+            <style>
+                .uploadResult {
+                    width: 100%;
+                    background-color: gray;
+                    margin-top: 10px;
+                }
+
+                .uploadResult ul {
+                    display: flex;
+                    flex-flow: row;
+                    justify-content: center;
+                    align-items: center;
+                    vertical-align: top;
+                    overflow: auto;
+                }
+
+                .uploadResult ul li {
+                    list-style: none;
+                    padding: 10px;
+                    margin-left: 2em;
+                }
+
+                .uploadResult ul li img {
+                    width: 100px;
+                }
+            </style>
+
+            <div class="uploadResult">
+                <ul>
+                    <li th:each="restaurantImage : ${dto.imageDTOList}">
+                        <img th:if="${restaurantImage.path != null}"
+                             th:src="|/display?fileName=${restaurantImage.getThumbnailURL()}|">
+                    </li>
+                </ul>
+            </div>
+
+            <a th:href="@{/restaurant/list}">
+                <button type="button" class="btn btn-info">List</button>
+            </a>
+
+            <a th:href="@{/restaurant/modify(pno=${dto.pno})}">
+                <button type="button" class="btn btn-primary">Modify</button>
+            </a>
+
+            <button type="button" class="btn btn-danger removeBtn">Remove</button>
+            <script th:inline="javascript">
+                var actionForm = $("form");
+
+                $(".removeBtn").click(function() {
+
+                    actionForm
+                        .attr("action", "/restaurant/remove")
+                        .attr("method", "post");
+
+                    actionForm.submit();
+                });
+            </script>
+
+        </th:block><!-- thc:fragment="content" -->
+    </th:block> <!-- th:replace-->
+</div>

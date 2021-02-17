@@ -6,3 +6,6 @@
 body {
   padding-top: 56px;
 }
+.hong1 .row .card {
+  width:max-content!important;
+}
