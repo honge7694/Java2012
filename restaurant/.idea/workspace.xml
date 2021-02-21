@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="30cb1600-2a6b-4934-a57f-e2156848d41f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/controller/RestaurantController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/controller/RestaurantController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/entity/Restaurant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/entity/Restaurant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/entity/RestaurantImage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/hong/restaurant/entity/RestaurantImage.java" afterDir="false" />
@@ -14,6 +15,8 @@
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/modify.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/modify.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/restaurant/read.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/restaurant/read.html" afterDir="false" />
+=======
+>>>>>>> 6d66240a818cc915d919095e7e406fa83060c94f
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,9 +108,14 @@
       <updated>1613521003837</updated>
       <workItem from="1613521005025" duration="198000" />
       <workItem from="1613521231725" duration="24735000" />
+<<<<<<< HEAD
       <workItem from="1613645617662" duration="4611000" />
       <workItem from="1613660442518" duration="3188000" />
       <workItem from="1613894675786" duration="9487000" />
+=======
+      <workItem from="1613707503946" duration="596000" />
+      <workItem from="1613721182699" duration="596000" />
+>>>>>>> 6d66240a818cc915d919095e7e406fa83060c94f
     </task>
     <servers />
   </component>
