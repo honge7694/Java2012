@@ -1,6 +1,8 @@
 package com.hong.restaurant.entity;
 
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 
@@ -23,7 +25,8 @@ public class RestaurantImage {
 
     private String path;
 
-    @ManyToOne(fetch = FetchType.LAZY) //무조건 lazy로
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) //무조건 lazy로
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
 
 

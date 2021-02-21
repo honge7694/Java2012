@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -86,6 +87,15 @@ public class RestaurantServiceImpl implements RestaurantService{
     @Override
     public void modify(RestaurantDTO restaurantDTO) {
         Optional<Restaurant> result = restaurantRepository.findById(restaurantDTO.getPno());
+
+        if(result.isPresent()){
+            Restaurant entity = result.get();
+
+            entity.changePname(restaurantDTO.getPname());
+            entity.changePcost(restaurantDTO.getPcost());
+
+            restaurantRepository.save(entity);
+        }
 
 
     }

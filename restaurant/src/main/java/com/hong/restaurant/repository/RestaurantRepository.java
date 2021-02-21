@@ -1,6 +1,7 @@
 package com.hong.restaurant.repository;
 
 import com.hong.restaurant.entity.Restaurant;
+import com.hong.restaurant.entity.RestaurantImage;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -8,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, QuerydslPredicateExecutor<Restaurant> {
 
@@ -19,4 +21,6 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Long>, Q
             "left outer join RestaurantImage ri on ri.restaurant = r" +
             " where r.pno = :pno group by ri")
     List<Object[]> getRestaurantWithAll(Long pno);
+
+
 }

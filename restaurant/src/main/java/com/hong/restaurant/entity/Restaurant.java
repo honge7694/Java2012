@@ -22,4 +22,12 @@ public class Restaurant {
 
     @Column(length = 100, nullable = false)
     private String pcost;
+
+    public void changePname(String pname){
+        this.pname = pname;
+    }
+
+    public void changePcost(String pcost){
+        this.pcost = pcost;
+    }
 }

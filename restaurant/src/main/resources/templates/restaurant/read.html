@@ -66,19 +66,6 @@
                 <button type="button" class="btn btn-primary">Modify</button>
             </a>
 
-            <button type="button" class="btn btn-danger removeBtn">Remove</button>
-            <script th:inline="javascript">
-                var actionForm = $("form");
-
-                $(".removeBtn").click(function() {
-
-                    actionForm
-                        .attr("action", "/restaurant/remove")
-                        .attr("method", "post");
-
-                    actionForm.submit();
-                });
-            </script>
 
         </th:block><!-- thc:fragment="content" -->
     </th:block> <!-- th:replace-->

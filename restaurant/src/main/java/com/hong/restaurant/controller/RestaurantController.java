@@ -71,17 +71,30 @@ public class RestaurantController {
         model.addAttribute("dto", restaurantDTO);
     }
 
-    @PostMapping("/modify")
+
 
 
     @PostMapping("/remove")
-    public String remove(long pno, RedirectAttributes redirectAttributes){
+    public String remove(long pno, Restaurant restaurantImage, RedirectAttributes redirectAttributes){
 
         log.info("pno" + pno);
+        log.info("imagepno" + restaurantImage);
 
+        //restaurantService.removeImage(restaurantImage);
         restaurantService.remove(pno);
 
         redirectAttributes.addFlashAttribute("msg" + pno);
+
+        return "redirect:/restaurant/list";
+    }
+
+    @PostMapping("/modify")
+    public String modify(RestaurantDTO restaurantDTO, RedirectAttributes redirectAttributes){
+
+        log.info("post modify..............................");
+        log.info("dto : " + restaurantDTO);
+
+        redirectAttributes.addAttribute("pno", restaurantDTO.getPno());
 
         return "redirect:/restaurant/list";
     }

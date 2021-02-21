@@ -15,12 +15,14 @@
 
                 <div class="form-group">
                     <label>Product Name</label>
-                    <input type="text" class="form-control" name="pname" th:value="${dto.pname}" placeholder="Enter Title">
+                    <input type="text" class="form-control" name="pname" th:value="${dto.pname}"
+                           placeholder="Enter Title">
                 </div>
 
                 <div class="form-group">
                     <label>Product Cost</label>
-                    <input type="text" class="form-control" name="pcost" th:value="${dto.pcost}" placeholder="Enter Cost">
+                    <input type="text" class="form-control" name="pcost" th:value="${dto.pcost}"
+                           placeholder="Enter Cost">
                 </div>
 
                 <div class="form-group fileForm">
@@ -67,12 +69,17 @@
 
                     </ul>
                 </div>
-
-                <button type="submit" class="btn btn-primary">Submit</button>
                 <!--
-                <button type="submit" class="btn btn-primary">Submit</button>
-                -->
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                -->
+                                <!--
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                -->
             </form>
+
+            <button type="button" class="btn btn-primary modifyBtn">Modify</button>
+            <button type="button" class="btn btn-info listBtn">List</button>
+            <button type="button" class="btn btn-danger removeBtn">Remove</button>
 
             <script>
                 $(document).ready(function (e) {
@@ -215,7 +222,45 @@
 
                 }); //document ready
 
-                           </script>
+            </script>
+                <script th:inline="javascript">
+                var actionForm = $("form");
+
+                $(".removeBtn").click(function () {
+
+                    actionForm
+                        .attr("action", "/restaurant/remove")
+                        .attr("method", "post");
+
+                    actionForm.submit();
+                });
+
+                $(".modifyBtn").click(function () {
+                    if (!confirm("수정하시겠습니까?")) {
+                        return;
+                    }
+
+                    actionForm
+                        .attr("action", "/restaurant/modify")
+                        .attr("method", "post")
+                        .submit();
+                });
+
+                $(".listBtn").click(function () {
+
+                    var pageInfo = $("input[name='page']");
+                   // var page = $("input[name='page']");
+
+                    actionForm.empty(); // form 태그의 모든 내용을 지움.
+                    actionForm.append(page); // 목록 페이지 이동에 필요한 내용을 다시 추가
+                    actionForm
+                        .attr("action", "/Restaurant/list")
+                        .attr("method", "get");
+
+                    console.log(actionForm.html());
+                    actionForm.submit();
+                });
+            </script>
         </th:block><!-- thc:fragment="content" -->
     </th:block> <!-- th:replace-->
 </div>
