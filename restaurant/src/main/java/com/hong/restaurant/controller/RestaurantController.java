@@ -94,6 +94,8 @@ public class RestaurantController {
         log.info("post modify..............................");
         log.info("dto : " + restaurantDTO);
 
+        restaurantService.modify(restaurantDTO);
+
         redirectAttributes.addAttribute("pno", restaurantDTO.getPno());
 
         return "redirect:/restaurant/list";

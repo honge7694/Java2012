@@ -3,6 +3,7 @@ package com.hong.restaurant.service;
 import com.hong.restaurant.dto.PageRequestDTO;
 import com.hong.restaurant.dto.PageResultDTO;
 import com.hong.restaurant.dto.RestaurantDTO;
+import com.hong.restaurant.dto.RestaurantImageDTO;
 import com.hong.restaurant.entity.Restaurant;
 import com.hong.restaurant.entity.RestaurantImage;
 import com.hong.restaurant.repository.RestaurantImageRepository;
@@ -86,7 +87,7 @@ public class RestaurantServiceImpl implements RestaurantService{
 
     @Override
     public void modify(RestaurantDTO restaurantDTO) {
-        Optional<Restaurant> result = restaurantRepository.findById(restaurantDTO.getPno());
+        /*Optional<Restaurant> result = restaurantRepository.findById(restaurantDTO.getPno());
 
         if(result.isPresent()){
             Restaurant entity = result.get();
@@ -95,8 +96,21 @@ public class RestaurantServiceImpl implements RestaurantService{
             entity.changePcost(restaurantDTO.getPcost());
 
             restaurantRepository.save(entity);
-        }
+        }*/
+        Map<String, Object> entityMap = dtoToEntity(restaurantDTO);
+        Restaurant restaurant = (Restaurant) entityMap.get("restaurant");
+        List<RestaurantImage> restaurantImageList = (List<RestaurantImage>) entityMap.get("imgList");
 
+        //restaurantImageList.remove(restaurant.getPno()); 안됨
+        //imageRepository.deleteById(restaurant.getPno()); 안됨
+        //restaurantImageList.remove(restaurantImageList);
+        restaurantRepository.save(restaurant);
+
+        restaurantImageList.forEach(restaurantImage -> {
+            imageRepository.delete(restaurantImage);
+
+        });
+       // imageRepository.save(restaurantImage);
 
     }
 }

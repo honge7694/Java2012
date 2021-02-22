@@ -248,13 +248,13 @@
 
                 $(".listBtn").click(function () {
 
-                    var pageInfo = $("input[name='page']");
+                    //var pageInfo = $("input[name='page']");
                    // var page = $("input[name='page']");
 
                     actionForm.empty(); // form 태그의 모든 내용을 지움.
-                    actionForm.append(page); // 목록 페이지 이동에 필요한 내용을 다시 추가
+                    //actionForm.append(page); // 목록 페이지 이동에 필요한 내용을 다시 추가
                     actionForm
-                        .attr("action", "/Restaurant/list")
+                        .attr("action", "/restaurant/list")
                         .attr("method", "get");
 
                     console.log(actionForm.html());

@@ -3,6 +3,7 @@ package com.hong.restaurant.entity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.jpa.repository.Modifying;
 
 import javax.persistence.*;
 
