@@ -26,7 +26,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/restaurant")
+//@RequestMapping("/restaurant")
+@RestController
 @Log4j2
 @RequiredArgsConstructor
 public class RestaurantController {
