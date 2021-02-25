@@ -1,6 +1,8 @@
 package com.hong.restaurant.dto;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -10,6 +12,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 @Data
+@Getter
+@Setter
 public class PageResultDTO<DTO, EN> {
 
     //DTO리스트

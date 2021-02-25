@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<!-- Page Content -->
+<div class="container">
+    <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+
+        <th:block th:fragment="content">
+
+            <h1 class="mt-4">Product Register Page</h1>
+
+            <form th:action="@{/modify}" th:method="post">
+
+                <input type="hidden" name="pno" th:value="${dto.pno}">
+
+                <div class="form-group">
+                    <label>Product Name</label>
+                    <input type="text" class="form-control" name="pname" th:value="${dto.pname}"
+                           placeholder="Enter Title">
+                </div>
+
+                <div class="form-group">
+                    <label>Product Cost</label>
+                    <input type="text" class="form-control" name="pcost" th:value="${dto.pcost}"
+                           placeholder="Enter Cost">
+                </div>
+
+                <div class="form-group fileForm">
+                    <label>Image Files</label>
+                    <div class="custom-file">
+                        <input type="file" class="custom-file-input files" id="fileInput" multiple>
+                        <label class="custom-file-label" data-browse="Browse"></label>
+                    </div>
+                </div>
+
+                <div class="box">
+
+                </div>
+
+                <style>
+                    .uploadResult {
+                        width: 100%;
+                        background-color: gray;
+                        margin-top: 10px;
+                    }
+
+                    .uploadResult ul {
+                        display: flex;
+                        flex-flow: row;
+                        justify-content: center;
+                        align-items: center;
+                        vertical-align: top;
+                        overflow: auto;
+                    }
+
+                    .uploadResult ul li {
+                        list-style: none;
+                        padding: 10px;
+                        margin-left: 2em;
+                    }
+
+                    .uploadResult ul li img {
+                        width: 100px;
+                    }
+                </style>
+
+                <div class="uploadResult">
+                    <ul>
+
+                    </ul>
+                </div>
+                <!--
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                -->
+                                <!--
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                                -->
+            </form>
+
+            <button type="button" class="btn btn-primary modifyBtn">Modify</button>
+            <button type="button" class="btn btn-info listBtn">List</button>
+            <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
+            <script>
+                $(document).ready(function (e) {
+
+                    var regex = new RegExp("(.*?)\.(exe|sh|zip|alz|tiff)$");
+                    var maxSize = 10485760; //10MB
+
+                    function checkExtension(fileName, fileSize) {
+
+                        if (fileSize >= maxSize) {
+                            alert("파일 사이즈 초과");
+                            return false;
+                        }
+
+                        if (regex.test(fileName)) {
+                            alert("해당 종류의 파일은 업로드할 수 없습니다.");
+                            return false;
+                        }
+                        return true;
+                    }
+
+                    $(".custom-file-input").on("change", function () {
+
+                        var fileName = $(this).val().split("\\").pop();
+                        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+
+                        var formData = new FormData();
+
+                        var inputFile = $(this);
+
+                        var files = inputFile[0].files;
+
+                        var appended = false;
+
+                        for (var i = 0; i < files.length; i++) {
+
+                            if (!checkExtension(files[i].name, files[i].size)) {
+                                return false;
+                            }
+
+                            console.log(files[i]);
+                            formData.append("uploadFiles", files[i]);
+                            appended = true;
+                        }
+
+                        //upload를 하지 않는다.
+                        if (!appended) {
+                            return;
+                        }
+
+                        for (var value of formData.values()) {
+                            console.log(value);
+                        }
+
+                        //실제 업로드 부분
+                        //upload ajax
+                        $.ajax({
+                            url: '/uploadAjax',
+                            processData: false,
+                            contentType: false,
+                            data: formData,
+                            type: 'POST',
+                            dataType: 'json',
+                            success: function (result) {
+                                console.log(result);
+                                showResult(result);
+                            },
+                            error: function (jqXHR, textStatus, errorThrown) {
+                                console.log(textStatus);
+                            }
+                        }); //$.ajax
+                    }); //end change event
+
+
+                    function showResult(uploadResultArr) {
+
+                        var uploadUL = $(".uploadResult ul");
+
+                        var str = "";
+
+                        $(uploadResultArr).each(function (i, obj) {
+
+                            str += "<li data-name='" + obj.fileName + "' data-path='" + obj.folderPath + "' data-uuid='" + obj.uuid + "'>";
+                            str + " <div>";
+                            str += "<button type='button' data-file=\'" + obj.imageURL + "\' "
+                            str += "class='btn-warning btn-sm'>X</button><br>";
+                            str += "<img src='/display?fileName=" + obj.thumbnailURL + "'>";
+                            str += "</div>";
+                            str + "</li>";
+                        });
+
+                        uploadUL.append(str);
+                    }
+
+                    $(".uploadResult ").on("click", "li button", function (e) {
+
+                        console.log("delete file");
+
+                        var targetFile = $(this).data("file");
+
+                        var targetLi = $(this).closest("li");
+
+                        $.ajax({
+                            url: '/removeFile',
+                            data: {fileName: targetFile},
+                            dataType: 'text',
+                            type: 'POST',
+                            success: function (result) {
+                                alert(result);
+
+                                targetLi.remove();
+                            }
+                        }); //$.ajax
+                    });
+
+
+                    //prevent submit
+                    $(".btn-primary").on("click", function (e) {
+                        e.preventDefault();
+
+                        var str = " ";
+
+                        $(".uploadResult li").each(function (i, obj) {
+                            var target = $(obj);
+
+                            str += "<input type='hidden' name='imageDTOList[" + i + "].imgName' value='" + target.data('name') + "'>";
+
+                            str += "<input type='hidden' name='imageDTOList[" + i + "].path' value='" + target.data('path') + "'>";
+
+                            str += "<input type='hidden' name='imageDTOList[" + i + "].uuid' value='" + target.data('uuid') + "'>";
+
+                        });
+
+                        //태그들이 추가된 것을 확인한 후에 comment를 제거
+                        $(".box").html(str);
+
+                        $("form").submit();
+
+                    });
+
+                }); //document ready
+
+            </script>
+                <script th:inline="javascript">
+                var actionForm = $("form");
+
+                $(".removeBtn").click(function () {
+
+                    actionForm
+                        .attr("action", "/restaurant/remove")
+                        .attr("method", "post");
+
+                    actionForm.submit();
+                });
+
+                $(".modifyBtn").click(function () {
+                    if (!confirm("수정하시겠습니까?")) {
+                        return;
+                    }
+
+                    actionForm
+                        .attr("action", "/restaurant/modify")
+                        .attr("method", "post")
+                        .submit();
+                });
+
+                $(".listBtn").click(function () {
+
+                    //var pageInfo = $("input[name='page']");
+                   // var page = $("input[name='page']");
+
+                    actionForm.empty(); // form 태그의 모든 내용을 지움.
+                    //actionForm.append(page); // 목록 페이지 이동에 필요한 내용을 다시 추가
+                    actionForm
+                        .attr("action", "/restaurant/list")
+                        .attr("method", "get");
+
+                    console.log(actionForm.html());
+                    actionForm.submit();
+                });
+            </script>
+        </th:block><!-- thc:fragment="content" -->
+    </th:block> <!-- th:replace-->
+</div>

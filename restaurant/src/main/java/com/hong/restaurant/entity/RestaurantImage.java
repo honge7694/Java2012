@@ -13,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = "restaurant") //연관 관계시 항상 주의
 public class RestaurantImage {
 

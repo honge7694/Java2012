@@ -9,7 +9,7 @@ plugins {
 group = 'com.hong'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
-apply plugin: 'war'
+targetCompatibility = '11'
 
 configurations {
     compileOnly {
@@ -21,7 +21,10 @@ repositories {
     mavenCentral()
 }
 
-bootWar.enabled=false
+war{
+    archiveName("restaurant.war")
+}
+
 war.enabled = true
 
 dependencies {
@@ -45,13 +48,7 @@ dependencies {
     providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
 }
 
-bootWar{
-    archiveName("restaurant.war")
-}
 
-war{
-    archiveName("restaurant.war")
-}
 
 test {
     useJUnitPlatform()

@@ -2,6 +2,8 @@ package com.hong.restaurant.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
@@ -9,6 +11,8 @@ import java.net.URLEncoder;
 
 @Data
 @AllArgsConstructor
+@Getter
+@Setter
 public class UploadResultDTO implements Serializable {
 
     private String fileName;

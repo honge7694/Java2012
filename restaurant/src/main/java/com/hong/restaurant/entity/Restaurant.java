@@ -7,6 +7,7 @@ import javax.persistence.*;
 
 @Entity
 @Getter
+@Setter
 @Builder
 @AllArgsConstructor // 모든 파라미터를 갖는 생성자를 생성
 @NoArgsConstructor // 파라미터를 갖지않는 생성자를 생성
