@@ -26,7 +26,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.UUID;
 
 @Controller
-@RequestMapping("/restaurant")
+@RequestMapping("/")
 @Log4j2
 @RequiredArgsConstructor
 public class RestaurantController {
@@ -40,13 +40,15 @@ public class RestaurantController {
 
         model.addAttribute("result", restaurantService.getList(pageRequestDTO));
 
-        return "/restaurant/list";
+        return "/list";
+        //return "/restaurant/list";
     }
 
     @GetMapping("/register")
     public String register(){
 
-        return "/restaurant/register";
+        return "/register";
+//        return "/restaurant/register";
     }
 
     @PostMapping("/register")
@@ -57,7 +59,8 @@ public class RestaurantController {
 
         redirectAttributes.addFlashAttribute("msg", pno);
 
-        return "redirect:/restaurant/list";
+        return "redirect:/list";
+//        return "redirect:/restaurant/list";
 
     }
 
@@ -85,7 +88,8 @@ public class RestaurantController {
 
         redirectAttributes.addFlashAttribute("msg" + pno);
 
-        return "redirect:/restaurant/list";
+        return "redirect:/list";
+//        return "redirect:/restaurant/list";
     }
 
     @PostMapping("/modify")
@@ -94,9 +98,12 @@ public class RestaurantController {
         log.info("post modify..............................");
         log.info("dto : " + restaurantDTO);
 
+        restaurantService.modify(restaurantDTO);
+
         redirectAttributes.addAttribute("pno", restaurantDTO.getPno());
 
-        return "redirect:/restaurant/list";
+        return "redirect:/list";
+//        return "redirect:/restaurant/list";
     }
 
 }

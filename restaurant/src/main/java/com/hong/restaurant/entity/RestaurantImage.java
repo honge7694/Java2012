@@ -3,6 +3,7 @@ package com.hong.restaurant.entity;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.jpa.repository.Modifying;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 @ToString(exclude = "restaurant") //연관 관계시 항상 주의
 public class RestaurantImage {
 

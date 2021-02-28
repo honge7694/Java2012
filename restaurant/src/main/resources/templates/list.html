@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<!-- Page Content -->
+<div class="container">
+    <th:block th:replace="~{/layout/basic :: setContent(~{this::content})}">
+        <th:block th:fragment="content">
+
+
+            <!-- 큰 음식사진 [S] -->
+            <div class="row align-items-center my-5">
+                <div class="col-lg-7">
+
+                        <img class="img-fluid rounded mb-4 mb-lg-0" src="http://placeimg.com/1140/600/food">
+
+                    <!--
+                    <img class="img-fluid rounded mb-4 mb-lg-0" src="http://placehold.it/1140x400" alt="">
+                    -->
+                </div>
+
+                <div class="col-lg-5">
+                    <h1 class="font-weight-light">Restaurant</h1>
+                    <p>This is a template that is great for small businesses. It doesn't have too much fancy flare to
+                        it,
+                        but it makes a great use of the standard Bootstrap core components. Feel free to use this
+                        template
+                        for any project you want!</p>
+                    <a class="btn btn-primary" th:href="@{/register}">Register</a>
+                </div>
+            </div>
+            <!-- 큰 음식사진 [E] -->
+
+            <!-- 중간 글씨 [S] -->
+            <div class="card text-white bg-secondary my-1 py-1 text-center">
+                <div class="card-body">
+                    <p class="text-white m-0 p-0">Best Menu</p>
+                </div>
+            </div>
+            <!-- 중간 글씨 [E] -->
+
+            <!-- Menu [S] -->
+            <a th:href="@{/register}" class="btn btn-primary btn-sm">Register</a>
+            <div class="hong1">
+                <div class="row">
+                    <ul th:each="dto : ${result.dtoList}" class="sorting">
+                        <li>
+                            <div class="col-md-4 mb-5">
+                                <div class="card h-100">
+                                    <a th:href="@{/read(pno = ${dto.pno}, page = ${result.page})}">
+                                    <div class="card-body">
+                                            <img th:if="${dto.imageDTOList.size() > 0 && dto.imageDTOList[0].path != null}"
+                                             th:src="|/display?fileName=${dto.imageDTOList[0].getThumbnailURL()}|">
+                                    </div>
+                                    </a>
+                                    <div class="card-footer">
+                                        <p class="card-text">이름 :[[${dto.pname}]] </p>
+                                        <p class="card-text">가격 : [[${dto.pcost}]] </p>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- Menu [E] -->
+
+            <!-- 중간 글씨 [S] -->
+            <div class="card text-white bg-secondary my-1 py-1 text-center">
+                <div class="card-body">
+                    <p class="text-white m-0 p-0">Info Restaurant</p>
+                </div>
+            </div>
+            <!-- 중간 글씨 [E] -->
+
+            <!-- Content Row-->
+            <div class="row">
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">영업 시간</h2>
+                            <p class="card-text">평일 : 11 : 30 am ~ 11 : 00pm<br><br>
+                            주말 : 2 : 00pm ~ 10 : 00pm<br><br>
+                            매월 첫째주 월요일 휴무</p>
+                        </div>
+
+                        <a th:href="@{/register}" class="btn btn-primary btn-sm">Register</a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">예약 문의</h2>
+                            <p class="card-text">
+                                TEL : 02-807-8882<br><br>
+
+                                점심, 저녁 예약은 30분 전에 미리 연락주세요.
+                            </p>
+                        </div>
+
+                        <a th:href="@{/register2}" class="btn btn-primary btn-sm">Register</a>
+                    </div>
+                </div>
+
+
+                <div class="col-md-4 mb-5">
+                    <div class="card h-100">
+                        <div class="card-body">
+                            <h2 class="card-title">찾아 오시는 길</h2>
+                            <p class="card-text">
+                                구 주소 : 서울 특별시 금천구 시흥동 103 - 6번지<br><br>
+
+                                신 주소 : 서울 특별시 금천구 금천로 71길 40<br><br>
+
+                                만약 위치를 찾기 어려운 경우<br>
+                                전화로 연락주세요.
+
+                            </p>
+                        </div>
+
+                        <a th:href="@{/register3}" class="btn btn-primary btn-sm">Register</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.col-md-4 -->
+
+
+            <!-- /.row -->
+
+
+        </th:block>
+    </th:block>
+</div>
+</html>

@@ -6,9 +6,10 @@ plugins {
     id 'com.ewerk.gradle.plugins.querydsl' version '1.0.10'
 }
 
-group = 'com.swcodingschool'
+group = 'org.zerock'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
+apply plugin: 'war'
 
 configurations {
     compileOnly {
@@ -19,6 +20,9 @@ configurations {
 repositories {
     mavenCentral()
 }
+
+bootWar.enabled=false
+war.enabled = true
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -32,6 +36,16 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
     implementation 'com.querydsl:querydsl-jpa'
+
+    providedRuntime 'org.springframework.boot:spring-boot-starter-tomcat'
+}
+
+bootWar{
+    archiveName("guestbook.war")
+}
+
+war{
+    archiveName("guestbook.war")
 }
 
 test {
@@ -40,7 +54,7 @@ test {
 
 def querydslDir = "$buildDir/generated/querydsl"
 
-querydsl {
+querydsl{
     jpa = true
     querydslSourcesDir = querydslDir
 
@@ -50,7 +64,7 @@ sourceSets {
     main.java.srcDir querydslDir
 }
 
-configurations {
+configurations{
     querydsl.extendsFrom compileClasspath
 }
 

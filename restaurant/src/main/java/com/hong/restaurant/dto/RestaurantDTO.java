@@ -9,6 +9,8 @@ import java.util.List;
 @NoArgsConstructor // 파라미터가 없는 생성자 생성.
 @AllArgsConstructor // 모든 파라미터를 갖는 생성자 생성.
 @Data
+@Getter
+@Setter
 public class RestaurantDTO {
 
     private Long pno;
